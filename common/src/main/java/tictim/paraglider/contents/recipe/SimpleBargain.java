@@ -22,11 +22,8 @@ import tictim.paraglider.api.bargain.OfferPreview;
 import tictim.paraglider.api.bargain.ParagliderBargainTags;
 import tictim.paraglider.api.bargain.ParagliderFailReasons;
 import tictim.paraglider.api.vessel.VesselContainer;
-import tictim.paraglider.bargain.preview.EssenceDemandPreview;
-import tictim.paraglider.bargain.preview.EssenceOfferPreview;
 import tictim.paraglider.bargain.preview.QuantifiedIngredient;
 import tictim.paraglider.bargain.preview.QuantifiedItem;
-import tictim.paraglider.bargain.preview.StaminaVesselDemandPreview;
 import tictim.paraglider.bargain.preview.StaminaVesselOfferPreview;
 import tictim.paraglider.contents.Contents;
 
@@ -44,7 +41,6 @@ public class SimpleBargain implements Bargain{
 	private final List<QuantifiedIngredient> itemDemands;
 	private final int heartContainerDemands;
 	private final int staminaVesselDemands;
-	private final int essenceDemands;
 
 	private final List<QuantifiedItem> itemOffers;
 	private final int heartContainerOffers;
@@ -74,7 +70,6 @@ public class SimpleBargain implements Bargain{
 		for(var itemDemand : this.itemDemands) Objects.requireNonNull(itemDemand);
 		this.heartContainerDemands = heartContainerDemands;
 		this.staminaVesselDemands = staminaVesselDemands;
-		this.essenceDemands = essenceDemands;
 		this.itemOffers = ImmutableList.copyOf(itemOffers);
 		this.heartContainerOffers = heartContainerOffers;
 		this.staminaVesselOffers = staminaVesselOffers;
@@ -84,9 +79,7 @@ public class SimpleBargain implements Bargain{
 		this.tags = new ObjectOpenHashSet<>(userTags);
 
 		if(!this.itemDemands.isEmpty()) this.tags.add(ParagliderBargainTags.CONSUMES_ITEM);
-		if(this.heartContainerDemands>0) this.tags.add(ParagliderBargainTags.CONSUMES_HEART_CONTAINER);
 		if(this.staminaVesselDemands>0) this.tags.add(ParagliderBargainTags.CONSUMES_STAMINA_VESSEL);
-		if(this.essenceDemands>0) this.tags.add(ParagliderBargainTags.CONSUMES_ESSENCE);
 		if(!this.itemOffers.isEmpty()) this.tags.add(ParagliderBargainTags.GIVES_ITEM);
 		if(this.heartContainerOffers>0) this.tags.add(ParagliderBargainTags.GIVES_HEART_CONTAINER);
 		if(this.staminaVesselOffers>0) this.tags.add(ParagliderBargainTags.GIVES_STAMINA_VESSEL);
@@ -105,9 +98,6 @@ public class SimpleBargain implements Bargain{
 	}
 	public int getStaminaVesselDemands(){
 		return staminaVesselDemands;
-	}
-	public int getEssenceDemands(){
-		return essenceDemands;
 	}
 
 	@NotNull public List<QuantifiedItem> getItemOffers(){
@@ -136,9 +126,6 @@ public class SimpleBargain implements Bargain{
 		this.demandPreviews = new ArrayList<>();
 
 		this.demandPreviews.addAll(this.itemDemands);
-		if(essenceDemands>0){
-			this.demandPreviews.add(new EssenceDemandPreview(essenceDemands));
-		}
 		return this.demandPreviews;
 	}
 	@Override @NotNull @Unmodifiable public List<@NotNull OfferPreview> previewOffers(){
@@ -148,9 +135,6 @@ public class SimpleBargain implements Bargain{
 		this.offerPreviews.addAll(itemOffers);
 		if(staminaVesselOffers>0){
 			this.offerPreviews.add(new StaminaVesselOfferPreview(staminaVesselOffers));
-		}
-		if(essenceOffers>0){
-			this.offerPreviews.add(new EssenceOfferPreview(essenceOffers));
 		}
 		return this.offerPreviews;
 	}
@@ -171,19 +155,14 @@ public class SimpleBargain implements Bargain{
 
 		if(container.takeStaminaVessels(staminaVesselDemands, true, false)<staminaVesselDemands)
 			reasons.add(ParagliderFailReasons.NOT_ENOUGH_STAMINA);
-		if(container.takeEssences(essenceDemands, true, false)<essenceDemands)
-			reasons.add(ParagliderFailReasons.NOT_ENOUGH_ESSENCES);
 
 		if(!reasons.isEmpty()) return BargainResult.fail(reasons);
 
 		int heartDiff = heartContainerOffers-heartContainerDemands;
 		int staminaDiff = staminaVesselOffers-staminaVesselDemands;
-		int essenceDiff = essenceOffers-essenceDemands;
 
 		if(staminaDiff>0&&container.giveStaminaVessels(staminaDiff, true, false)<staminaDiff)
 			reasons.add(ParagliderFailReasons.STAMINA_FULL);
-		if(essenceDiff>0&&container.giveEssences(essenceDiff, true, false)<essenceDiff)
-			reasons.add(ParagliderFailReasons.ESSENCE_FULL);
 
 		if(!reasons.isEmpty()) return BargainResult.fail(reasons);
 
@@ -211,12 +190,6 @@ public class SimpleBargain implements Bargain{
 						container.giveStaminaVessels(staminaDiff, false, true)!=staminaDiff :
 						container.takeStaminaVessels(-staminaDiff, false, true)!=-staminaDiff)
 					ParagliderMod.LOGGER.error("Stamina Vessel transaction of bargain {} failed to resolve after successful simulation.", id);
-			}
-			if(essenceDiff!=0){
-				if(essenceDiff>0 ?
-						container.giveEssences(essenceDiff, false, true)!=essenceDiff :
-						container.takeEssences(-essenceDiff, false, true)!=-essenceDiff)
-					ParagliderMod.LOGGER.error("Essence transaction of bargain {} failed to resolve after successful simulation.", id);
 			}
 		}
 		return BargainResult.success();

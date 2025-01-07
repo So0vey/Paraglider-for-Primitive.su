@@ -35,9 +35,7 @@ public final class BargainContext{
 	@Nullable private Vec3 lookAt;
 
 	private int @Nullable [] inventoryHashes;
-	private int heartContainerCache;
 	private int staminaVesselCache;
-	private int essenceCache;
 
 	private boolean catalogRefreshScheduled;
 	private boolean finished;
@@ -127,10 +125,6 @@ public final class BargainContext{
 		if(this.staminaVesselCache!=container.staminaVessel()){
 			refreshCatalog = true;
 			this.staminaVesselCache = container.staminaVessel();
-		}
-		if(this.essenceCache!=container.essence()){
-			refreshCatalog = true;
-			this.essenceCache = container.essence();
 		}
 		if(refreshCatalog){
 			ParagliderNetwork.get().syncBargainCatalog(this, makeCatalog());

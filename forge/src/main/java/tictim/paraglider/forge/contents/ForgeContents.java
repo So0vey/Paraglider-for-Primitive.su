@@ -27,8 +27,6 @@ import tictim.paraglider.api.bargain.Bargain;
 import tictim.paraglider.contents.Contents;
 import tictim.paraglider.contents.block.GoddessStatueBlock;
 import tictim.paraglider.contents.block.HornedStatueBlock;
-import tictim.paraglider.contents.item.AntiVesselItem;
-import tictim.paraglider.contents.item.EssenceItem;
 import tictim.paraglider.contents.item.ParagliderItem;
 import tictim.paraglider.contents.recipe.CosmeticRecipe;
 import tictim.paraglider.contents.recipe.SimpleBargainSerializer;
@@ -69,8 +67,6 @@ public final class ForgeContents implements Contents{
 
 	private final RegistryObject<ParagliderItem> paraglider = items.register("paraglider", () -> new ForgeParagliderItem(PARAGLIDER_DEFAULT_COLOR));
 	private final RegistryObject<ParagliderItem> dekuLeaf = items.register("deku_leaf", () -> new ForgeParagliderItem(DEKU_LEAF_DEFAULT_COLOR));
-	private final RegistryObject<Item> antiVessel = items.register("anti_vessel", () -> new AntiVesselItem(epicItem()));
-	private final RegistryObject<Item> essence = items.register("essence", () -> new EssenceItem(rareItem()));
 	private final RegistryObject<BlockItem> goddessStatueItem = items.register("goddess_statue", () -> new BlockItem(goddessStatue.get(), rareItem()));
 	private final RegistryObject<BlockItem> kakarikoGoddessStatueItem = items.register("kakariko_goddess_statue", () -> new BlockItem(kakarikoGoddessStatue.get(), rareItem()));
 	private final RegistryObject<BlockItem> goronGoddessStatueItem = items.register("goron_goddess_statue", () -> new BlockItem(goronGoddessStatue.get(), rareItem()));
@@ -107,8 +103,6 @@ public final class ForgeContents implements Contents{
 			.displayItems((features, out) -> {
 				out.accept(paraglider.get());
 				out.accept(dekuLeaf.get());
-				out.accept(antiVessel.get());
-				out.accept(essence.get());
 				out.accept(goddessStatue.get());
 				out.accept(kakarikoGoddessStatue.get());
 				out.accept(goronGoddessStatue.get());
@@ -139,12 +133,6 @@ public final class ForgeContents implements Contents{
 	}
 	@Override @NotNull public ParagliderItem dekuLeaf(){
 		return dekuLeaf.get();
-	}
-	@Override @NotNull public Item antiVessel(){
-		return antiVessel.get();
-	}
-	@Override @NotNull public Item essence(){
-		return essence.get();
 	}
 	@Override @NotNull public Block goddessStatue(){
 		return goddessStatue.get();

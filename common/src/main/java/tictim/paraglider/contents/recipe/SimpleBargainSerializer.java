@@ -170,7 +170,6 @@ public abstract class SimpleBargainSerializer<T extends SimpleBargain> implement
 			demand.write(buffer);
 		buffer.writeVarInt(recipe.getHeartContainerDemands());
 		buffer.writeVarInt(recipe.getStaminaVesselDemands());
-		buffer.writeVarInt(recipe.getEssenceDemands());
 
 		List<QuantifiedItem> itemOffers = recipe.getItemOffers();
 		buffer.writeVarInt(itemOffers.size());

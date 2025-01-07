@@ -19,7 +19,6 @@ public class SimpleVesselContainer implements VesselContainer, Serde, Copy{
 	protected final Player player;
 
 	protected int staminaVessel;
-	protected int essence;
 
 	public SimpleVesselContainer(@Nullable Player player){
 		this.player = player;
@@ -27,9 +26,6 @@ public class SimpleVesselContainer implements VesselContainer, Serde, Copy{
 
 	@Override public final int staminaVessel(){
 		return staminaVessel;
-	}
-	@Override public final int essence(){
-		return essence;
 	}
 
 	@Override @NotNull public SetResult setStaminaVessel(int amount, boolean simulate, boolean playEffect){
@@ -44,17 +40,6 @@ public class SimpleVesselContainer implements VesselContainer, Serde, Copy{
 		}
 		return SetResult.OK;
 	}
-	@Override @NotNull public SetResult setEssence(int amount, boolean simulate, boolean playEffect){
-		if(amount<0) return SetResult.TOO_LOW;
-		int change = amount-this.essence;
-		if(change==0) return SetResult.NO_CHANGE;
-		if(!simulate){
-			this.essence = amount;
-			onChange(ActionType.ESSENCE, change);
-			if(playEffect) playEffect(ActionType.ESSENCE, change);
-		}
-		return SetResult.OK;
-	}
 
 	@Override public int giveStaminaVessels(int amount, boolean simulate, boolean playEffect){
 		amount = Math.min(amount, Cfg.get().maxStaminaVessels()-this.staminaVessel);
@@ -63,16 +48,6 @@ public class SimpleVesselContainer implements VesselContainer, Serde, Copy{
 			this.staminaVessel += amount;
 			onChange(ActionType.STAMINA_VESSEL, amount);
 			if(playEffect) playEffect(ActionType.STAMINA_VESSEL, amount);
-		}
-		return amount;
-	}
-	@Override public int giveEssences(int amount, boolean simulate, boolean playEffect){
-		amount = Math.min(amount, Integer.MAX_VALUE-this.essence);
-		if(amount<=0) return 0;
-		if(!simulate){
-			this.essence += amount;
-			onChange(ActionType.ESSENCE, amount);
-			if(playEffect) playEffect(ActionType.ESSENCE, amount);
 		}
 		return amount;
 	}
@@ -86,21 +61,10 @@ public class SimpleVesselContainer implements VesselContainer, Serde, Copy{
 		}
 		return amount;
 	}
-	@Override public int takeEssences(int amount, boolean simulate, boolean playEffect){
-		amount = Math.min(amount, this.essence);
-		if(amount<=0) return 0;
-		if(!simulate){
-			this.essence -= amount;
-			onChange(ActionType.ESSENCE, -amount);
-			if(playEffect) playEffect(ActionType.ESSENCE, -amount);
-		}
-		return amount;
-	}
 
 	@Override public void copyFrom(@NotNull Object from){
 		if(!(from instanceof VesselContainer vessels)) return;
 		setStaminaVessel(vessels.staminaVessel(), false, false);
-		setEssence(vessels.essence(), false, false);
 	}
 
 	protected void onChange(@NotNull ActionType actionType, int change){}
@@ -121,20 +85,17 @@ public class SimpleVesselContainer implements VesselContainer, Serde, Copy{
 	@Override @NotNull public CompoundTag write(){
 		CompoundTag tag = new CompoundTag();
 		tag.putInt("staminaVessels", this.staminaVessel);
-		tag.putInt("essences", this.essence);
 		return tag;
 	}
 
 	@Override public void read(@NotNull CompoundTag tag){
 		this.staminaVessel = tag.getInt("staminaVessels");
-		this.essence = tag.getInt("essences");
 	}
 
 	@Override public String toString(){
 		return "SimpleVesselContainer{"+
 				"heartContainer="+"0"+
 				", staminaVessel="+staminaVessel+
-				", essence="+essence+
 				'}';
 	}
 

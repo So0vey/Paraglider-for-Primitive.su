@@ -59,10 +59,6 @@ public class StatueBargainBuilder{
 		staminaVesselDemands = quantity;
 		return this;
 	}
-	public StatueBargainBuilder demandEssence(int quantity){
-		essenceDemands = quantity;
-		return this;
-	}
 
 	public StatueBargainBuilder offer(Item item, int count){
 		itemOffers.add(new QuantifiedItem(item, count));

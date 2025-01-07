@@ -25,9 +25,7 @@ public interface Contents{
 
 	@NotNull ParagliderItem paraglider();
 	@NotNull ParagliderItem dekuLeaf();
-
-	@NotNull Item antiVessel();
-	@NotNull Item essence();
+	
 
 	// blocks
 

@@ -16,28 +16,16 @@ public final class NullVesselContainer implements VesselContainer{
 	@Override public int staminaVessel(){
 		return 0;
 	}
-	@Override public int essence(){
-		return 0;
-	}
 
 	@Override @NotNull public SetResult setStaminaVessel(int amount, boolean simulate, boolean playEffect){
-		return SetResult.FAIL;
-	}
-	@Override @NotNull public SetResult setEssence(int amount, boolean simulate, boolean playEffect){
 		return SetResult.FAIL;
 	}
 
 	@Override public int giveStaminaVessels(int quantity, boolean simulate, boolean playEffect){
 		return 0;
 	}
-	@Override public int giveEssences(int quantity, boolean simulate, boolean playEffect){
-		return 0;
-	}
 
 	@Override public int takeStaminaVessels(int quantity, boolean simulate, boolean playEffect){
-		return 0;
-	}
-	@Override public int takeEssences(int quantity, boolean simulate, boolean playEffect){
 		return 0;
 	}
 

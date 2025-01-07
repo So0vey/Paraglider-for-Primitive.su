@@ -221,7 +221,7 @@ public final class ParagliderCommands{
 			int value = switch(this){
                 case HEART -> 0;
                 case STAMINA -> vessels.staminaVessel();
-				case ESSENCE -> vessels.essence();
+				case ESSENCE -> 0;
 			};
 			source.sendSuccess(() -> Component.translatable(getResult, player.getDisplayName(), value), false);
 			return value;
@@ -281,7 +281,7 @@ public final class ParagliderCommands{
 			return switch(this){
                 case HEART -> null;
                 case STAMINA -> vessels.setStaminaVessel(amount, simulate, playEffect);
-				case ESSENCE -> vessels.setEssence(amount, simulate, playEffect);
+				case ESSENCE -> null;
 			};
 		}
 
@@ -289,7 +289,7 @@ public final class ParagliderCommands{
 			return switch(this){
                 case HEART -> 0;
                 case STAMINA -> vessels.giveStaminaVessels(amount, simulate, playEffect);
-				case ESSENCE -> vessels.giveEssences(amount, simulate, playEffect);
+				case ESSENCE -> 0;
 			};
 		}
 
@@ -297,7 +297,7 @@ public final class ParagliderCommands{
 			return switch(this){
                 case HEART -> 0;
                 case STAMINA -> vessels.takeStaminaVessels(amount, simulate, playEffect);
-				case ESSENCE -> vessels.takeEssences(amount, simulate, playEffect);
+				case ESSENCE -> 0;
 			};
 		}
 	}
