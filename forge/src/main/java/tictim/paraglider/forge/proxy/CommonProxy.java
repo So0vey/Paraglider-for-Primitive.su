@@ -23,7 +23,6 @@ import tictim.paraglider.client.ParagliderClientSettings;
 import tictim.paraglider.command.ParagliderCommands;
 import tictim.paraglider.config.PlayerStateMapConfig;
 import tictim.paraglider.contents.Contents;
-import tictim.paraglider.contents.ParagliderVillageStructures;
 import tictim.paraglider.forge.ForgeParagliderNetwork;
 import tictim.paraglider.forge.capability.PlayerMovementProvider;
 import tictim.paraglider.forge.config.ForgePlayerStateMapConfig;
@@ -71,7 +70,6 @@ public class CommonProxy{
 		MinecraftForge.EVENT_BUS.addListener((OnDatapackSyncEvent e) -> {
 			MinecraftServer server = e.getPlayerList().getServer();
 			ParagliderUtils.checkBargainRecipes(server);
-			ParagliderVillageStructures.addVillageStructures(server);
 		});
 		MinecraftForge.EVENT_BUS.addListener((ServerStoppingEvent e) -> this.stateMapConfig.removeCallbacks());
 
@@ -81,7 +79,6 @@ public class CommonProxy{
 
 	protected void onServerAboutToStart(ServerAboutToStartEvent event){
 		MinecraftServer server = event.getServer();
-		ParagliderVillageStructures.addVillageStructures(server);
 		PlayerStateMapConfig stateMapConfig = this.stateMapConfig;
 		stateMapConfig.removeCallbacks();
 		stateMapConfig.reload();
