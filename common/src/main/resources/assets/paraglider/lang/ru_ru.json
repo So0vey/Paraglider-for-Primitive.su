@@ -1,0 +1,39 @@
+{
+	"itemGroup.paraglider": "Параглайдер",
+
+	"item.paraglider.paraglider": "Параглайдер",
+	"item.paraglider.deku_leaf": "Лист деку",
+
+	"tooltip.paraglider.paraglider_broken": "Сломано",
+
+	"advancement.paraglider": "Параглайдер",
+	"advancement.paraglider.desc": "Достижения мода \"Параглайдер\"!",
+	"advancement.paraglider.paraglider": "Половина полета",
+	"advancement.paraglider.paraglider.desc": "Получить палаглайдер",
+
+	"key.paraglider.paragliderSettings": "Настройки мода \"Параглайдер\"",
+
+	"paragliderSettings.staminaWheelSettings": "Настройки отображения выносливости",
+	"paragliderSettings.windParticleFreq": "Частота частиц ветра: %s",
+	"paragliderSettings.windParticleFreq.tooltip": "Настраивает частоту эффектов частиц, создаваемых восходящим ветром. (0%% ~ 100%%)",
+	"paragliderSettings.save": "Сохранить Настройки",
+	"paragliderSettings.save.unsaved": "Сохранить Настройки*",
+	"paragliderSettings.openFolder": "Открыть папку настроек",
+	"paragliderSettings.openFolder.tooltip": "Ищи файл с именем '§eparagliderSettings.nbt§r'. Ты можешь скопировать его в другие инстансы или перезаписать текущий.n (После перезаписи убедись, что настройки перезагружены.)",
+	"paragliderSettings.reload": "Перезагрузить настройки",
+	"paragliderSettings.saving": "Сохранение...",
+	"paragliderSettings.saving.success": "Сохранено!",
+	"paragliderSettings.saving.failure": "Ошибка сохранения.",
+	"paragliderSettings.loading": "Загрузка...",
+	"paragliderSettings.loading.success": "Загруженно!",
+	"paragliderSettings.loading.failure": "Ошибка загрузки.",
+
+	"commands.paraglider.reload_player_states.success": "Навыки игрока перезагружены.",
+	"commands.paraglider.reload_player_states.fail": "Не удалось перезагрузить навыки игрока.",
+
+	"adjustStamina.guide.0": "Перемести колесо выносливости для изменения его положения.",
+	"adjustStamina.guide.1": "1~3: Изменить размер колеса выносливости.",
+	"adjustStamina.guide.2": "Esc, %s или %s: Выйти без сохранения.",
+	"adjustStamina.save": "Сохранить",
+	"adjustStamina.cancel": "Отменить"
+}
