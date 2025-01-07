@@ -136,9 +136,6 @@ public class SimpleBargain implements Bargain{
 		this.demandPreviews = new ArrayList<>();
 
 		this.demandPreviews.addAll(this.itemDemands);
-		if(staminaVesselDemands>0){
-			this.demandPreviews.add(new StaminaVesselDemandPreview(staminaVesselDemands));
-		}
 		if(essenceDemands>0){
 			this.demandPreviews.add(new EssenceDemandPreview(essenceDemands));
 		}

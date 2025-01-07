@@ -16,8 +16,8 @@ public final class StaminaVesselOfferPreview implements OfferPreview{
 
 	public StaminaVesselOfferPreview(int quantity){
 		this.quantity = quantity;
-		this.preview = new ItemStack(Contents.get().staminaVessel());
-	}
+        preview = null;
+    }
 
 	@Override @NotNull public ItemStack preview(){
 		return preview;

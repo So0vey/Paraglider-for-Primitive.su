@@ -30,9 +30,6 @@ public class AntiVesselItem extends Item{
 
 			int staminaVesselsTaken = vessels.takeStaminaVessels(Integer.MAX_VALUE, false, true);
 			if(staminaVesselsTaken>0){
-				if(staminaVesselsTaken>0){
-					ParagliderUtils.giveItem(player, new ItemStack(Contents.get().staminaVessel(), staminaVesselsTaken));
-				}
 				stack.shrink(1);
 				return InteractionResultHolder.consume(stack);
 			}

@@ -30,7 +30,6 @@ import tictim.paraglider.contents.block.HornedStatueBlock;
 import tictim.paraglider.contents.item.AntiVesselItem;
 import tictim.paraglider.contents.item.EssenceItem;
 import tictim.paraglider.contents.item.ParagliderItem;
-import tictim.paraglider.contents.item.StaminaVesselItem;
 import tictim.paraglider.contents.recipe.CosmeticRecipe;
 import tictim.paraglider.contents.recipe.SimpleBargainSerializer;
 import tictim.paraglider.contents.worldgen.NetherHornedStatue;
@@ -70,7 +69,6 @@ public final class ForgeContents implements Contents{
 
 	private final RegistryObject<ParagliderItem> paraglider = items.register("paraglider", () -> new ForgeParagliderItem(PARAGLIDER_DEFAULT_COLOR));
 	private final RegistryObject<ParagliderItem> dekuLeaf = items.register("deku_leaf", () -> new ForgeParagliderItem(DEKU_LEAF_DEFAULT_COLOR));
-	private final RegistryObject<Item> staminaVessel = items.register("stamina_vessel", () -> new StaminaVesselItem(rareItem()));
 	private final RegistryObject<Item> antiVessel = items.register("anti_vessel", () -> new AntiVesselItem(epicItem()));
 	private final RegistryObject<Item> essence = items.register("essence", () -> new EssenceItem(rareItem()));
 	private final RegistryObject<BlockItem> goddessStatueItem = items.register("goddess_statue", () -> new BlockItem(goddessStatue.get(), rareItem()));
@@ -109,7 +107,6 @@ public final class ForgeContents implements Contents{
 			.displayItems((features, out) -> {
 				out.accept(paraglider.get());
 				out.accept(dekuLeaf.get());
-				out.accept(staminaVessel.get());
 				out.accept(antiVessel.get());
 				out.accept(essence.get());
 				out.accept(goddessStatue.get());
@@ -142,9 +139,6 @@ public final class ForgeContents implements Contents{
 	}
 	@Override @NotNull public ParagliderItem dekuLeaf(){
 		return dekuLeaf.get();
-	}
-	@Override @NotNull public Item staminaVessel(){
-		return staminaVessel.get();
 	}
 	@Override @NotNull public Item antiVessel(){
 		return antiVessel.get();

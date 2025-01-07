@@ -107,8 +107,7 @@ public final class ParagliderUtils{
 	 */
 	@Nullable public static Item getAppropriateVessel(){
 		FeatureCfg cfg = FeatureCfg.get();
-		return cfg.enableStaminaVessels() ? Contents.get().staminaVessel() :
-				null;
+		return null;
 	}
 
 	private static final UUID EXHAUSTION_ATTRIBUTE_UUID = UUID.fromString("65ed2ca4-ceb3-4521-8552-73006dcba58d");

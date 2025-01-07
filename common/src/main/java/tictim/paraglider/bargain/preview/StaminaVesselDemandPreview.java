@@ -17,10 +17,10 @@ public final class StaminaVesselDemandPreview implements DemandPreview{
 	private final int quantity;
 	private final List<ItemStack> preview;
 
-	public StaminaVesselDemandPreview(int quantity){
+	public StaminaVesselDemandPreview(int quantity, List<ItemStack> preview){
 		this.quantity = quantity;
-		this.preview = List.of(new ItemStack(Contents.get().staminaVessel()));
-	}
+        this.preview = preview;
+    }
 
 	@Override @NotNull @Unmodifiable public List<@NotNull ItemStack> preview(){
 		return preview;
