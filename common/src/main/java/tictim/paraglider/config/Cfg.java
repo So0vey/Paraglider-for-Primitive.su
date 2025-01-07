@@ -49,8 +49,6 @@ public interface Cfg{
 	 */
 	int paragliderDurability();
 
-	// spirit orbs
-
 	/**
 	 * If {@code true}, Ender Dragon will drop heart container(stamina vessel if heart container is disabled) upon
 	 * death.
@@ -73,21 +71,6 @@ public interface Cfg{
 	 * @return Config value
 	 */
 	boolean raidGivesVessel();
-
-	/**
-	 * Amount of Spirit Orbs dropped from spawners.
-	 *
-	 * @return Config value
-	 */
-	int spawnerSpiritOrbDrops();
-
-	/**
-	 * If true, various types of chest will have chances of having Spirit Orbs inside.<br/>
-	 * Does not change contents of already generated chests.
-	 *
-	 * @return Config value
-	 */
-	boolean spiritOrbLoots();
 
 	// vessels
 

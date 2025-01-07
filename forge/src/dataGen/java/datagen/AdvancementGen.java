@@ -68,16 +68,6 @@ public class AdvancementGen extends ForgeAdvancementProvider{
 					.parent(root)
 					.addCriterion("bargain", new ImpossibleTrigger.TriggerInstance())
 					.save(s, ParagliderAdvancements.STATUES_BARGAIN.toString());
-			Advancement allVessels = advancement(
-					new ItemStack(contents.heartContainer()),
-					"advancement.paraglider.all_vessels",
-					FrameType.CHALLENGE,
-					true,
-					true,
-					false)
-					.parent(root)
-					.addCriterion("code_triggered", new ImpossibleTrigger.TriggerInstance())
-					.save(s, ParagliderAdvancements.ALL_VESSELS.toString());
 		}));
 	}
 

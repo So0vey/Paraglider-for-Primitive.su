@@ -20,14 +20,14 @@ public enum LootConditions implements LootItemCondition, Serializer<LootItemCond
 		ForgeContents contents = ForgeParagliderMod.instance().getContents();
 		return switch(this){
 			case WITHER_DROPS_VESSEL -> contents.witherDropsVesselConfigCondition.get();
-			case SPIRIT_ORB_LOOTS -> contents.spiritOrbLootsConfigCondition.get();
-		};
+            case SPIRIT_ORB_LOOTS -> null;
+        };
 	}
 	@Override public boolean test(@NotNull LootContext lootContext){
 		return switch(this){
 			case WITHER_DROPS_VESSEL -> Cfg.get().witherDropsVessel();
-			case SPIRIT_ORB_LOOTS -> Cfg.get().spiritOrbLoots();
-		};
+            case SPIRIT_ORB_LOOTS -> true;
+        };
 	}
 
 	@Override public void serialize(@NotNull JsonObject json, @NotNull LootItemCondition condition, @NotNull JsonSerializationContext ctx){}

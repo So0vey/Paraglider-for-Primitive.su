@@ -73,8 +73,8 @@ public abstract class ParagliderNetworkBase implements ParagliderNetwork{
 		sendToPlayer(target, msg);
 	}
 
-	@Override public void syncVessels(@NotNull ServerPlayer player, int stamina, int heartContainers, int staminaVessels){
-		SyncVesselMsg msg = new SyncVesselMsg(stamina, heartContainers, staminaVessels);
+	@Override public void syncVessels(@NotNull ServerPlayer player, int stamina, int staminaVessels){
+		SyncVesselMsg msg = new SyncVesselMsg(stamina, staminaVessels);
 		traceSendToPlayer(Kind.VESSEL, player, msg);
 		sendToPlayer(player, msg);
 	}

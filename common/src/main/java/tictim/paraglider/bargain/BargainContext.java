@@ -124,10 +124,6 @@ public final class BargainContext{
 		}
 
 		VesselContainer container = VesselContainer.get(this.player);
-		if(this.heartContainerCache!=container.heartContainer()){
-			refreshCatalog = true;
-			this.heartContainerCache = container.heartContainer();
-		}
 		if(this.staminaVesselCache!=container.staminaVessel()){
 			refreshCatalog = true;
 			this.staminaVesselCache = container.staminaVessel();

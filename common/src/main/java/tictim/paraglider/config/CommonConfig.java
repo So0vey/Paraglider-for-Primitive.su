@@ -5,7 +5,6 @@ import net.minecraftforge.common.ForgeConfigSpec;
 public class CommonConfig implements FeatureCfg, DebugCfg{
 	protected final ForgeConfigSpec spec;
 
-	private final ForgeConfigSpec.BooleanValue enableSpiritOrbGens;
 	private final ForgeConfigSpec.BooleanValue enableHeartContainers;
 	private final ForgeConfigSpec.BooleanValue enableStaminaVessels;
 	private final ForgeConfigSpec.BooleanValue enableStructures;
@@ -22,12 +21,6 @@ public class CommonConfig implements FeatureCfg, DebugCfg{
 						Easy to access switches to toggle side features on and off.
 						Most of them requires server restart or datapack reload. All of them, actually.""")
 				.push("features");
-		enableSpiritOrbGens = common.comment("""
-						For those who wants to remove Spirit Orbs generated in the world, more specifically...
-						  * Spirit Orbs generated in various chests
-						  * Spirit Orbs dropped by spawners and such
-						Note that bargain recipe for Heart Containers/Stamina Vessels will persist, even if this option is disabled.""")
-				.define("spiritOrbGens", true);
 		enableHeartContainers = common.comment("""
 						For those who wants to remove entirety of Heart Containers from the game, more specifically...
 						  * Heart Containers obtained by "challenges" (i.e. Killing dragon, wither, raid)
@@ -53,9 +46,6 @@ public class CommonConfig implements FeatureCfg, DebugCfg{
 		spec = common.build();
 	}
 
-	@Override public boolean enableSpiritOrbGens(){
-		return enableSpiritOrbGens.get();
-	}
 	@Override public boolean enableHeartContainers(){
 		return enableHeartContainers.get();
 	}

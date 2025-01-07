@@ -13,9 +13,6 @@ public final class NullVesselContainer implements VesselContainer{
 		return instance;
 	}
 
-	@Override public int heartContainer(){
-		return 0;
-	}
 	@Override public int staminaVessel(){
 		return 0;
 	}
@@ -23,9 +20,6 @@ public final class NullVesselContainer implements VesselContainer{
 		return 0;
 	}
 
-	@Override @NotNull public SetResult setHeartContainer(int amount, boolean simulate, boolean playEffect){
-		return SetResult.FAIL;
-	}
 	@Override @NotNull public SetResult setStaminaVessel(int amount, boolean simulate, boolean playEffect){
 		return SetResult.FAIL;
 	}
@@ -33,9 +27,6 @@ public final class NullVesselContainer implements VesselContainer{
 		return SetResult.FAIL;
 	}
 
-	@Override public int giveHeartContainers(int quantity, boolean simulate, boolean playEffect){
-		return 0;
-	}
 	@Override public int giveStaminaVessels(int quantity, boolean simulate, boolean playEffect){
 		return 0;
 	}
@@ -43,9 +34,6 @@ public final class NullVesselContainer implements VesselContainer{
 		return 0;
 	}
 
-	@Override public int takeHeartContainers(int quantity, boolean simulate, boolean playEffect){
-		return 0;
-	}
 	@Override public int takeStaminaVessels(int quantity, boolean simulate, boolean playEffect){
 		return 0;
 	}

@@ -39,7 +39,6 @@ public interface ParagliderNetwork{
 
 	void syncVessels(@NotNull ServerPlayer player,
 	                 int stamina,
-	                 int heartContainers,
 	                 int staminaVessels);
 
 	// bargain

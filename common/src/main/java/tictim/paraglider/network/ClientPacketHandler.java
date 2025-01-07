@@ -57,8 +57,7 @@ public final class ClientPacketHandler{
 		Minecraft mc = Minecraft.getInstance();
 		if(mc.player==null) return;
 		VesselContainer vessels = VesselContainer.get(mc.player);
-		vessels.setHeartContainer(msg.heartContainers(), false, false);
-		vessels.setStaminaVessel(msg.staminaVessels(), false, false);
+//		vessels.setStaminaVessel(msg.staminaVessels(), false, false);
 		Stamina.get(mc.player).setStamina(msg.stamina());
 	}
 

@@ -58,12 +58,10 @@ public class RecipeGen extends RecipeProvider{
 				.build(consumer, ParagliderAPI.id("cosmetic/rito_goddess_statue"));
 
 		new StatueBargainBuilder(ParagliderBargainTypes.GODDESS_STATUE)
-				.demand(contents.spiritOrb(), 4)
 				.offerHeartContainer(1)
 				.condition(ConfigConditionSerializer.HEART_CONTAINER_ENABLED)
 				.build(consumer, ParagliderAPI.id("goddess_statue/heart_container"));
 		new StatueBargainBuilder(ParagliderBargainTypes.GODDESS_STATUE)
-				.demand(contents.spiritOrb(), 4)
 				.offerStaminaVessel(1)
 				.condition(ConfigConditionSerializer.STAMINA_VESSEL_ENABLED)
 				.build(consumer, ParagliderAPI.id("goddess_statue/stamina_vessel"));

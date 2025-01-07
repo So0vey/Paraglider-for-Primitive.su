@@ -29,9 +29,7 @@ import tictim.paraglider.contents.block.GoddessStatueBlock;
 import tictim.paraglider.contents.block.HornedStatueBlock;
 import tictim.paraglider.contents.item.AntiVesselItem;
 import tictim.paraglider.contents.item.EssenceItem;
-import tictim.paraglider.contents.item.HeartContainerItem;
 import tictim.paraglider.contents.item.ParagliderItem;
-import tictim.paraglider.contents.item.SpiritOrbItem;
 import tictim.paraglider.contents.item.StaminaVesselItem;
 import tictim.paraglider.contents.recipe.CosmeticRecipe;
 import tictim.paraglider.contents.recipe.SimpleBargainSerializer;
@@ -41,8 +39,6 @@ import tictim.paraglider.contents.worldgen.UndergroundHornedStatue;
 import tictim.paraglider.forge.contents.item.ForgeParagliderItem;
 import tictim.paraglider.forge.contents.loot.LootConditions;
 import tictim.paraglider.forge.contents.loot.ParagliderLoot;
-import tictim.paraglider.forge.contents.loot.SpawnerSpiritOrbLoot;
-import tictim.paraglider.forge.contents.loot.SpiritOrbLoot;
 import tictim.paraglider.forge.contents.loot.VesselLoot;
 
 import static tictim.paraglider.api.ParagliderAPI.MODID;
@@ -74,9 +70,7 @@ public final class ForgeContents implements Contents{
 
 	private final RegistryObject<ParagliderItem> paraglider = items.register("paraglider", () -> new ForgeParagliderItem(PARAGLIDER_DEFAULT_COLOR));
 	private final RegistryObject<ParagliderItem> dekuLeaf = items.register("deku_leaf", () -> new ForgeParagliderItem(DEKU_LEAF_DEFAULT_COLOR));
-	private final RegistryObject<Item> heartContainer = items.register("heart_container", () -> new HeartContainerItem(rareItem()));
 	private final RegistryObject<Item> staminaVessel = items.register("stamina_vessel", () -> new StaminaVesselItem(rareItem()));
-	private final RegistryObject<Item> spiritOrb = items.register("spirit_orb", () -> new SpiritOrbItem(uncommonItem()));
 	private final RegistryObject<Item> antiVessel = items.register("anti_vessel", () -> new AntiVesselItem(epicItem()));
 	private final RegistryObject<Item> essence = items.register("essence", () -> new EssenceItem(rareItem()));
 	private final RegistryObject<BlockItem> goddessStatueItem = items.register("goddess_statue", () -> new BlockItem(goddessStatue.get(), rareItem()));
@@ -92,14 +86,10 @@ public final class ForgeContents implements Contents{
 			() -> RecipeType.simple(ParagliderAPI.id("bargain")));
 
 	private final RegistryObject<Codec<ParagliderLoot>> paragliderLoot = loots.register("paraglider", () -> ParagliderLoot.CODEC);
-	private final RegistryObject<Codec<SpiritOrbLoot>> spiritOrbLoot = loots.register("spirit_orb", () -> SpiritOrbLoot.CODEC);
 	private final RegistryObject<Codec<VesselLoot>> vesselLoot = loots.register("vessel", () -> VesselLoot.CODEC);
-	private final RegistryObject<Codec<SpawnerSpiritOrbLoot>> spawnerSpiritOrbLoot = loots.register("spawner_spirit_orb", () -> SpawnerSpiritOrbLoot.CODEC);
 
 	public final RegistryObject<LootItemConditionType> witherDropsVesselConfigCondition = lootConditions.register("config_wither_drops_vessel",
 			() -> new LootItemConditionType(LootConditions.WITHER_DROPS_VESSEL));
-	public final RegistryObject<LootItemConditionType> spiritOrbLootsConfigCondition = lootConditions.register("config_spirit_orb_loots",
-			() -> new LootItemConditionType(LootConditions.SPIRIT_ORB_LOOTS));
 
 	private final RegistryObject<StructureType<TarreyTownGoddessStatue>> tarreyTownGoddessStatue = structureType("tarrey_town_goddess_statue", TarreyTownGoddessStatue.CODEC);
 	private final RegistryObject<StructureType<NetherHornedStatue>> netherHornedStatue = structureType("nether_horned_statue", NetherHornedStatue.CODEC);
@@ -119,9 +109,7 @@ public final class ForgeContents implements Contents{
 			.displayItems((features, out) -> {
 				out.accept(paraglider.get());
 				out.accept(dekuLeaf.get());
-				out.accept(heartContainer.get());
 				out.accept(staminaVessel.get());
-				out.accept(spiritOrb.get());
 				out.accept(antiVessel.get());
 				out.accept(essence.get());
 				out.accept(goddessStatue.get());
@@ -155,14 +143,8 @@ public final class ForgeContents implements Contents{
 	@Override @NotNull public ParagliderItem dekuLeaf(){
 		return dekuLeaf.get();
 	}
-	@Override @NotNull public Item heartContainer(){
-		return heartContainer.get();
-	}
 	@Override @NotNull public Item staminaVessel(){
 		return staminaVessel.get();
-	}
-	@Override @NotNull public Item spiritOrb(){
-		return spiritOrb.get();
 	}
 	@Override @NotNull public Item antiVessel(){
 		return antiVessel.get();

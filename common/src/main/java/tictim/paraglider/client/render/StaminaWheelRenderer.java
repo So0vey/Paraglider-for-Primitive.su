@@ -83,7 +83,7 @@ public abstract class StaminaWheelRenderer{
 
 				RenderSystem.setShaderColor(
 						red(entry.color)/(float)0xFF,
-						green(entry.color)/(float)0xFF,
+						blue(entry.color)/(float)0xFF,
 						blue(entry.color)/(float)0xFF,
 						alpha/(float)0xFF);
 

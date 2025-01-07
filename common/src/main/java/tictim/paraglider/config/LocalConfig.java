@@ -21,8 +21,6 @@ public class LocalConfig implements Cfg{
 	private final ForgeConfigSpec.BooleanValue enderDragonDropsVessel;
 	private final ForgeConfigSpec.BooleanValue witherDropsVessel;
 	private final ForgeConfigSpec.BooleanValue raidGivesVessel;
-	private final ForgeConfigSpec.IntValue spawnerSpiritOrbDrops;
-	private final ForgeConfigSpec.BooleanValue spiritOrbLoots;
 
 	private final ForgeConfigSpec.IntValue startingHearts;
 	private final ForgeConfigSpec.IntValue maxHeartContainers;
@@ -57,6 +55,12 @@ public class LocalConfig implements Cfg{
 						Multiplier to horizontal movement speed while paragliding.
 						Value of 0.5 means 50% of the speed, 2.0 means two times the speed and so forth.""")
 				.defineInRange("paraglidingSpeed", 1.0, 0.2, 10);
+		/*
+		Плохо понимаю.
+		Свяазанно с прочностью параглайдера.
+		Но в душе не ебу при чем тут Спирит орб
+		todo: выяснить выше
+		 */
 		paragliderDurability = b.comment("Durability of Paragliders. Set to zero to disable durability.")
 				.defineInRange("paragliderDurability", 0, 0, Integer.MAX_VALUE);
 
@@ -67,13 +71,6 @@ public class LocalConfig implements Cfg{
 				.define("enderDragonDropsVessel", true);
 		raidGivesVessel = b.comment("If true, Raids will give heart container(stamina vessel if heart container is disabled) upon victory.")
 				.define("raidGivesVessel", true);
-		spawnerSpiritOrbDrops = b.comment("Amount of Spirit Orbs dropped from spawners.")
-				.defineInRange("spawnerSpiritOrbDrops", 2, 0, 64);
-		spiritOrbLoots = b.comment("""
-						If true, various types of chest will have chances of having Spirit Orbs inside.
-						Does not change contents of already generated chests.""")
-				.define("spiritOrbLoots", true);
-		b.pop();
 
 		b.push("vessels");
 		startingHearts = b.comment("Starting health points measured in number of hearts.").defineInRange("startingHearts", 10, 1, 512);
@@ -130,12 +127,6 @@ public class LocalConfig implements Cfg{
 	}
 	@Override public boolean raidGivesVessel(){
 		return get(spec, raidGivesVessel);
-	}
-	@Override public int spawnerSpiritOrbDrops(){
-		return get(spec, spawnerSpiritOrbDrops);
-	}
-	@Override public boolean spiritOrbLoots(){
-		return get(spec, spiritOrbLoots);
 	}
 	@Override public int startingHearts(){
 		return get(spec, startingHearts);

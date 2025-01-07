@@ -26,9 +26,7 @@ public interface Contents{
 	@NotNull ParagliderItem paraglider();
 	@NotNull ParagliderItem dekuLeaf();
 
-	@NotNull Item heartContainer();
 	@NotNull Item staminaVessel();
-	@NotNull Item spiritOrb();
 	@NotNull Item antiVessel();
 	@NotNull Item essence();
 

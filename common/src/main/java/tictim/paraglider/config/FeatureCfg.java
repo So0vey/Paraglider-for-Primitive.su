@@ -12,17 +12,6 @@ public interface FeatureCfg{
 		return ParagliderMod.instance().getFeatureConfig();
 	}
 
-	/**
-	 * For those who wants to remove Spirit Orbs generated in the world, more specifically...
-	 * <ul>
-	 * <li>Spirit Orbs generated in various chests</li>
-	 * <li>Spirit Orbs dropped by spawners and such</li>
-	 * </ul>
-	 * Note that bargain recipe for Heart Containers/Stamina Vessels will persist, even if this option is disabled.
-	 *
-	 * @return Config value
-	 */
-	boolean enableSpiritOrbGens();
 
 	/**
 	 * For those who wants to remove entirety of Heart Containers from the game, more specifically...

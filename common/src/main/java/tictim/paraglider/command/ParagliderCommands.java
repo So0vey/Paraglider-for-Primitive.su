@@ -219,8 +219,8 @@ public final class ParagliderCommands{
 		private int tell(@NotNull CommandSourceStack source, @NotNull Player player){
 			VesselContainer vessels = VesselContainer.get(player);
 			int value = switch(this){
-				case HEART -> vessels.heartContainer();
-				case STAMINA -> vessels.staminaVessel();
+                case HEART -> 0;
+                case STAMINA -> vessels.staminaVessel();
 				case ESSENCE -> vessels.essence();
 			};
 			source.sendSuccess(() -> Component.translatable(getResult, player.getDisplayName(), value), false);
@@ -279,24 +279,24 @@ public final class ParagliderCommands{
 
 		@NotNull private VesselContainer.SetResult set(@NotNull VesselContainer vessels, int amount, boolean simulate, boolean playEffect){
 			return switch(this){
-				case HEART -> vessels.setHeartContainer(amount, simulate, playEffect);
-				case STAMINA -> vessels.setStaminaVessel(amount, simulate, playEffect);
+                case HEART -> null;
+                case STAMINA -> vessels.setStaminaVessel(amount, simulate, playEffect);
 				case ESSENCE -> vessels.setEssence(amount, simulate, playEffect);
 			};
 		}
 
 		private int give(@NotNull VesselContainer vessels, int amount, boolean simulate, boolean playEffect){
 			return switch(this){
-				case HEART -> vessels.giveHeartContainers(amount, simulate, playEffect);
-				case STAMINA -> vessels.giveStaminaVessels(amount, simulate, playEffect);
+                case HEART -> 0;
+                case STAMINA -> vessels.giveStaminaVessels(amount, simulate, playEffect);
 				case ESSENCE -> vessels.giveEssences(amount, simulate, playEffect);
 			};
 		}
 
 		private int take(@NotNull VesselContainer vessels, int amount, boolean simulate, boolean playEffect){
 			return switch(this){
-				case HEART -> vessels.takeHeartContainers(amount, simulate, playEffect);
-				case STAMINA -> vessels.takeStaminaVessels(amount, simulate, playEffect);
+                case HEART -> 0;
+                case STAMINA -> vessels.takeStaminaVessels(amount, simulate, playEffect);
 				case ESSENCE -> vessels.takeEssences(amount, simulate, playEffect);
 			};
 		}

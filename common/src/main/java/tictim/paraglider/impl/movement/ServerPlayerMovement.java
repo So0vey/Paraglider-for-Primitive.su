@@ -2,9 +2,6 @@ package tictim.paraglider.impl.movement;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import tictim.paraglider.ParagliderMod;
@@ -80,23 +77,6 @@ public class ServerPlayerMovement extends PlayerMovement implements Serde{
 		this.resync = false;
 
 		boolean vesselsChanged = this.heartContainerChanged||this.staminaVesselChanged;
-		if(this.heartContainerChanged){
-			double delta;
-			double value = Cfg.get().additionalMaxHealth(vessels().heartContainer());
-			AttributeInstance attrib = player().getAttribute(Attributes.MAX_HEALTH);
-			if(attrib!=null){
-				AttributeModifier prev = attrib.getModifier(HEART_CONTAINER_UUID);
-				if(prev!=null) attrib.removeModifier(prev);
-				if(value!=0){
-					attrib.addPermanentModifier(new AttributeModifier(HEART_CONTAINER_UUID,
-							"Heart Containers", value, AttributeModifier.Operation.ADDITION));
-				}
-				delta = value-(prev!=null ? prev.getAmount() : 0);
-			}else delta = 0;
-
-			player().setHealth(Math.min(player().getMaxHealth(), player().getHealth()+Math.max(0, (float)delta)));
-			this.heartContainerChanged = false;
-		}
 		if(this.staminaVesselChanged){
 			stamina().setStamina(Math.min(stamina().stamina(), stamina().maxStamina()));
 			this.staminaVesselChanged = false;
@@ -142,11 +122,9 @@ public class ServerPlayerMovement extends PlayerMovement implements Serde{
 		if(resync||vesselsChanged){
 			ParagliderNetwork.get().syncVessels(player(),
 					stamina().stamina(),
-					vessels().heartContainer(),
 					vessels().staminaVessel());
 
 			if(vesselsChanged&&
-					Cfg.get().maxHeartContainers()<=vessels().heartContainer()&&
 					Cfg.get().maxStaminaVessels()<=vessels().staminaVessel()){
 				ParagliderUtils.giveAdvancement(player(), ParagliderAdvancements.ALL_VESSELS, "code_triggered");
 			}

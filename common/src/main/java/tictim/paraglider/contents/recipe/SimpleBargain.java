@@ -24,8 +24,6 @@ import tictim.paraglider.api.bargain.ParagliderFailReasons;
 import tictim.paraglider.api.vessel.VesselContainer;
 import tictim.paraglider.bargain.preview.EssenceDemandPreview;
 import tictim.paraglider.bargain.preview.EssenceOfferPreview;
-import tictim.paraglider.bargain.preview.HeartContainerDemandPreview;
-import tictim.paraglider.bargain.preview.HeartContainerOfferPreview;
 import tictim.paraglider.bargain.preview.QuantifiedIngredient;
 import tictim.paraglider.bargain.preview.QuantifiedItem;
 import tictim.paraglider.bargain.preview.StaminaVesselDemandPreview;
@@ -138,9 +136,6 @@ public class SimpleBargain implements Bargain{
 		this.demandPreviews = new ArrayList<>();
 
 		this.demandPreviews.addAll(this.itemDemands);
-		if(heartContainerDemands>0){
-			this.demandPreviews.add(new HeartContainerDemandPreview(heartContainerDemands));
-		}
 		if(staminaVesselDemands>0){
 			this.demandPreviews.add(new StaminaVesselDemandPreview(staminaVesselDemands));
 		}
@@ -154,9 +149,6 @@ public class SimpleBargain implements Bargain{
 		this.offerPreviews = new ArrayList<>();
 
 		this.offerPreviews.addAll(itemOffers);
-		if(heartContainerOffers>0){
-			this.offerPreviews.add(new HeartContainerOfferPreview(heartContainerOffers));
-		}
 		if(staminaVesselOffers>0){
 			this.offerPreviews.add(new StaminaVesselOfferPreview(staminaVesselOffers));
 		}
@@ -180,8 +172,6 @@ public class SimpleBargain implements Bargain{
 			}
 		}
 
-		if(container.takeHeartContainers(heartContainerDemands, true, false)<heartContainerDemands)
-			reasons.add(ParagliderFailReasons.NOT_ENOUGH_HEARTS);
 		if(container.takeStaminaVessels(staminaVesselDemands, true, false)<staminaVesselDemands)
 			reasons.add(ParagliderFailReasons.NOT_ENOUGH_STAMINA);
 		if(container.takeEssences(essenceDemands, true, false)<essenceDemands)
@@ -193,8 +183,6 @@ public class SimpleBargain implements Bargain{
 		int staminaDiff = staminaVesselOffers-staminaVesselDemands;
 		int essenceDiff = essenceOffers-essenceDemands;
 
-		if(heartDiff>0&&container.giveHeartContainers(heartDiff, true, false)<heartDiff)
-			reasons.add(ParagliderFailReasons.HEART_FULL);
 		if(staminaDiff>0&&container.giveStaminaVessels(staminaDiff, true, false)<staminaDiff)
 			reasons.add(ParagliderFailReasons.STAMINA_FULL);
 		if(essenceDiff>0&&container.giveEssences(essenceDiff, true, false)<essenceDiff)
@@ -221,12 +209,6 @@ public class SimpleBargain implements Bargain{
 				ParagliderUtils.giveItem(player, item.getItemWithQuantity());
 			}
 
-			if(heartDiff!=0){
-				if(heartDiff>0 ?
-						container.giveHeartContainers(heartDiff, false, true)!=heartDiff :
-						container.takeHeartContainers(-heartDiff, false, true)!=-heartDiff)
-					ParagliderMod.LOGGER.error("Heart Container transaction of bargain {} failed to resolve after successful simulation.", id);
-			}
 			if(staminaDiff!=0){
 				if(staminaDiff>0 ?
 						container.giveStaminaVessels(staminaDiff, false, true)!=staminaDiff :

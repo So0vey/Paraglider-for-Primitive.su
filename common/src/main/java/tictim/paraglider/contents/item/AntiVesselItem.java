@@ -28,12 +28,8 @@ public class AntiVesselItem extends Item{
 		if(!level.isClientSide){
 			VesselContainer vessels = VesselContainer.get(player);
 
-			int heartContainersTaken = vessels.takeHeartContainers(Integer.MAX_VALUE, false, true);
 			int staminaVesselsTaken = vessels.takeStaminaVessels(Integer.MAX_VALUE, false, true);
-			if(heartContainersTaken>0||staminaVesselsTaken>0){
-				if(heartContainersTaken>0){
-					ParagliderUtils.giveItem(player, new ItemStack(Contents.get().heartContainer(), heartContainersTaken));
-				}
+			if(staminaVesselsTaken>0){
 				if(staminaVesselsTaken>0){
 					ParagliderUtils.giveItem(player, new ItemStack(Contents.get().staminaVessel(), staminaVesselsTaken));
 				}

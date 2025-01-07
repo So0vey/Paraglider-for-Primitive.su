@@ -18,7 +18,6 @@ import tictim.paraglider.config.Cfg;
 public class SimpleVesselContainer implements VesselContainer, Serde, Copy{
 	protected final Player player;
 
-	protected int heartContainer;
 	protected int staminaVessel;
 	protected int essence;
 
@@ -26,9 +25,6 @@ public class SimpleVesselContainer implements VesselContainer, Serde, Copy{
 		this.player = player;
 	}
 
-	@Override public final int heartContainer(){
-		return heartContainer;
-	}
 	@Override public final int staminaVessel(){
 		return staminaVessel;
 	}
@@ -36,18 +32,6 @@ public class SimpleVesselContainer implements VesselContainer, Serde, Copy{
 		return essence;
 	}
 
-	@Override @NotNull public SetResult setHeartContainer(int amount, boolean simulate, boolean playEffect){
-		if(amount<0) return SetResult.TOO_LOW;
-		if(amount>Cfg.get().maxHeartContainers()) return SetResult.TOO_HIGH;
-		int change = amount-this.heartContainer;
-		if(change==0) return SetResult.NO_CHANGE;
-		if(!simulate){
-			this.heartContainer = amount;
-			onChange(ActionType.HEART_CONTAINER, change);
-			if(playEffect) playEffect(ActionType.HEART_CONTAINER, change);
-		}
-		return SetResult.OK;
-	}
 	@Override @NotNull public SetResult setStaminaVessel(int amount, boolean simulate, boolean playEffect){
 		if(amount<0) return SetResult.TOO_LOW;
 		if(amount>Cfg.get().maxStaminaVessels()) return SetResult.TOO_HIGH;
@@ -72,16 +56,6 @@ public class SimpleVesselContainer implements VesselContainer, Serde, Copy{
 		return SetResult.OK;
 	}
 
-	@Override public int giveHeartContainers(int amount, boolean simulate, boolean playEffect){
-		amount = Math.min(amount, Cfg.get().maxHeartContainers()-this.heartContainer);
-		if(amount<=0) return 0;
-		if(!simulate){
-			this.heartContainer += amount;
-			onChange(ActionType.HEART_CONTAINER, amount);
-			if(playEffect) playEffect(ActionType.HEART_CONTAINER, amount);
-		}
-		return amount;
-	}
 	@Override public int giveStaminaVessels(int amount, boolean simulate, boolean playEffect){
 		amount = Math.min(amount, Cfg.get().maxStaminaVessels()-this.staminaVessel);
 		if(amount<=0) return 0;
@@ -99,17 +73,6 @@ public class SimpleVesselContainer implements VesselContainer, Serde, Copy{
 			this.essence += amount;
 			onChange(ActionType.ESSENCE, amount);
 			if(playEffect) playEffect(ActionType.ESSENCE, amount);
-		}
-		return amount;
-	}
-
-	@Override public int takeHeartContainers(int amount, boolean simulate, boolean playEffect){
-		amount = Math.min(amount, this.heartContainer);
-		if(amount<=0) return 0;
-		if(!simulate){
-			this.heartContainer -= amount;
-			onChange(ActionType.HEART_CONTAINER, -amount);
-			if(playEffect) playEffect(ActionType.HEART_CONTAINER, -amount);
 		}
 		return amount;
 	}
@@ -136,7 +99,6 @@ public class SimpleVesselContainer implements VesselContainer, Serde, Copy{
 
 	@Override public void copyFrom(@NotNull Object from){
 		if(!(from instanceof VesselContainer vessels)) return;
-		setHeartContainer(vessels.heartContainer(), false, false);
 		setStaminaVessel(vessels.staminaVessel(), false, false);
 		setEssence(vessels.essence(), false, false);
 	}
@@ -158,21 +120,19 @@ public class SimpleVesselContainer implements VesselContainer, Serde, Copy{
 
 	@Override @NotNull public CompoundTag write(){
 		CompoundTag tag = new CompoundTag();
-		tag.putInt("heartContainers", this.heartContainer);
 		tag.putInt("staminaVessels", this.staminaVessel);
 		tag.putInt("essences", this.essence);
 		return tag;
 	}
 
 	@Override public void read(@NotNull CompoundTag tag){
-		this.heartContainer = tag.getInt("heartContainers");
 		this.staminaVessel = tag.getInt("staminaVessels");
 		this.essence = tag.getInt("essences");
 	}
 
 	@Override public String toString(){
 		return "SimpleVesselContainer{"+
-				"heartContainer="+heartContainer+
+				"heartContainer="+"0"+
 				", staminaVessel="+staminaVessel+
 				", essence="+essence+
 				'}';

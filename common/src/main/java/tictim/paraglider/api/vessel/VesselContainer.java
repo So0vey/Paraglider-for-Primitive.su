@@ -26,10 +26,6 @@ public interface VesselContainer{
 	}
 
 	/**
-	 * @return Number of Heart Containers. Minimum value of {@code 0}.
-	 */
-	int heartContainer();
-	/**
 	 * @return Number of Stamina Vessels. Minimum value of {@code 0}.
 	 */
 	int staminaVessel();
@@ -38,19 +34,6 @@ public interface VesselContainer{
 	 */
 	int essence();
 
-	/**
-	 * Attempts to set the amount of Heart Containers equal to {@code amount}. Depending on
-	 *
-	 * @param amount     Amount of the Heart Container
-	 * @param simulate   If {@code true}, the result of the action won't be applied to this container; the returned
-	 *                   value is what would be expected as a result of subsequent non-simulated action, assuming there
-	 *                   wasn't any state modification happened between the simulation and the actual action.
-	 * @param playEffect If {@code true}, effects like particles and sound effects may be played. Only applies to
-	 *                   successful non-simulation actions.<br> Note that this is not guaranteed; depending on
-	 *                   implementation this value might not affect anything.
-	 * @return Whether the action succeed
-	 */
-	@NotNull SetResult setHeartContainer(int amount, boolean simulate, boolean playEffect);
 
 	/**
 	 * Attempts to set the amount of Stamina Vessels equal to {@code amount}. Depending on
@@ -81,19 +64,6 @@ public interface VesselContainer{
 	@NotNull SetResult setEssence(int amount, boolean simulate, boolean playEffect);
 
 	/**
-	 * Attempts to give this container Heart Containers to the maximum amount of {@code amount}.
-	 *
-	 * @param amount     Amount of the Heart Containers
-	 * @param simulate   If {@code true}, the result of the action won't be applied to this container; the returned
-	 *                   value is what would be expected as a result of subsequent non-simulated action, assuming there
-	 *                   wasn't any state modification happened between the simulation and the actual action.
-	 * @param playEffect If {@code true}, effects like particles and sound effects may be played. Only applies to
-	 *                   successful non-simulation actions.<br> Note that this is not guaranteed; depending on
-	 *                   implementation this value might not affect anything.
-	 * @return Amount of Heart Containers given; if {@code amount <= 0}, then the returned value is {@code 0}.
-	 */
-	int giveHeartContainers(int amount, boolean simulate, boolean playEffect);
-	/**
 	 * Attempts to give this container Stamina Vessels to the maximum amount of {@code amount}.
 	 *
 	 * @param amount     Amount of the Stamina Vessels
@@ -120,19 +90,6 @@ public interface VesselContainer{
 	 */
 	int giveEssences(int amount, boolean simulate, boolean playEffect);
 
-	/**
-	 * Attempts to take away Heart Containers from this container to the maximum amount of {@code amount}.
-	 *
-	 * @param amount     Amount of the Heart Containers
-	 * @param simulate   If {@code true}, the result of the action won't be applied to this container; the returned
-	 *                   value is what would be expected as a result of subsequent non-simulated action, assuming there
-	 *                   wasn't any state modification happened between the simulation and the actual action.
-	 * @param playEffect If {@code true}, effects like particles and sound effects may be played. Only applies to
-	 *                   successful non-simulation actions.<br> Note that this is not guaranteed; depending on
-	 *                   implementation this value might not affect anything.
-	 * @return Amount of Heart Containers taken; if {@code amount <= 0}, then the returned value is {@code 0}.
-	 */
-	int takeHeartContainers(int amount, boolean simulate, boolean playEffect);
 	/**
 	 * Attempts to take away Stamina Vessels from this container to the maximum amount of {@code amount}.
 	 *

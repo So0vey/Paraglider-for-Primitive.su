@@ -107,9 +107,8 @@ public final class ParagliderUtils{
 	 */
 	@Nullable public static Item getAppropriateVessel(){
 		FeatureCfg cfg = FeatureCfg.get();
-		return cfg.enableHeartContainers() ? Contents.get().heartContainer() :
-				cfg.enableStaminaVessels() ? Contents.get().staminaVessel() :
-						null;
+		return cfg.enableStaminaVessels() ? Contents.get().staminaVessel() :
+				null;
 	}
 
 	private static final UUID EXHAUSTION_ATTRIBUTE_UUID = UUID.fromString("65ed2ca4-ceb3-4521-8552-73006dcba58d");
@@ -237,7 +236,7 @@ public final class ParagliderUtils{
 		list.add(stb.toString());
 
 		list.add("Recovery Delay: "+state.recoveryDelay());
-		list.add(vessels.staminaVessel()+" Stamina Vessels, "+vessels.heartContainer()+" Heart Containers");
+		list.add(vessels.staminaVessel()+" Stamina Vessels, ");
 		list.add(movement.recoveryDelay()+" Recovery Delay");
 		list.add("Stamina Wheel X: "+PERCENTAGE.format(clientSettings.staminaWheelX())+
 				", Stamina Wheel Y: "+PERCENTAGE.format(clientSettings.staminaWheelY()));
