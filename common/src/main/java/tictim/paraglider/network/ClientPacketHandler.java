@@ -8,7 +8,6 @@ import tictim.paraglider.ParagliderMod;
 import tictim.paraglider.api.movement.Movement;
 import tictim.paraglider.api.stamina.Stamina;
 import tictim.paraglider.api.vessel.VesselContainer;
-import tictim.paraglider.client.screen.BargainScreen;
 import tictim.paraglider.network.message.BargainDialogMsg;
 import tictim.paraglider.network.message.BargainEndMsg;
 import tictim.paraglider.network.message.BargainInitMsg;
@@ -59,46 +58,6 @@ public final class ClientPacketHandler{
 		VesselContainer vessels = VesselContainer.get(mc.player);
 //		vessels.setStaminaVessel(msg.staminaVessels(), false, false);
 		Stamina.get(mc.player).setStamina(msg.stamina());
-	}
-
-	// bargain
-
-	public static void handleBargainInit(BargainInitMsg msg){
-		trace(Kind.BARGAIN, msg);
-		Minecraft mc = Minecraft.getInstance();
-		mc.setScreen(new BargainScreen(msg.sessionId(), msg.catalog(), msg.lookAt(), msg.dialog()));
-	}
-
-	public static void handleSyncCatalog(SyncCatalogMsg msg){
-		trace(Kind.BARGAIN, msg);
-		Minecraft mc = Minecraft.getInstance();
-		if(mc.screen instanceof BargainScreen bargainScreen&&bargainScreen.sessionId==msg.sessionId()){
-			bargainScreen.setCatalog(msg.catalog());
-		}
-	}
-
-	public static void handleSyncLookAt(SyncLookAtMsg msg){
-		trace(Kind.BARGAIN, msg);
-		Minecraft mc = Minecraft.getInstance();
-		if(mc.screen instanceof BargainScreen bargainScreen&&bargainScreen.sessionId==msg.sessionId()){
-			bargainScreen.setLookAt(msg.lookAt());
-		}
-	}
-
-	public static void handleBargainDialog(BargainDialogMsg msg){
-		trace(Kind.BARGAIN, msg);
-		Minecraft mc = Minecraft.getInstance();
-		if(mc.screen instanceof BargainScreen bargainScreen&&bargainScreen.sessionId==msg.sessionId()){
-			bargainScreen.setDialog(msg.dialog());
-		}
-	}
-
-	public static void handleBargainEnd(BargainEndMsg msg){
-		trace(Kind.BARGAIN, msg);
-		Minecraft mc = Minecraft.getInstance();
-		if(mc.screen instanceof BargainScreen bargainScreen&&bargainScreen.sessionId==msg.sessionId()){
-			mc.setScreen(null);
-		}
 	}
 
 	// wind

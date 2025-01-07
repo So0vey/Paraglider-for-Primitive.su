@@ -74,25 +74,21 @@ public final class ForgeParagliderNetwork extends ParagliderNetworkBase{
 				BargainInitMsg::write, BargainInitMsg::read,
 				(msg, ctx) -> {
 					ctx.get().setPacketHandled(true);
-					ctx.get().enqueueWork(() -> ClientPacketHandler.handleBargainInit(msg));
 				}, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 		net.registerMessage(5, SyncCatalogMsg.class,
 				SyncCatalogMsg::write, SyncCatalogMsg::read,
 				(msg, ctx) -> {
 					ctx.get().setPacketHandled(true);
-					ctx.get().enqueueWork(() -> ClientPacketHandler.handleSyncCatalog(msg));
 				}, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 		net.registerMessage(6, SyncLookAtMsg.class,
 				SyncLookAtMsg::write, SyncLookAtMsg::read,
 				(msg, ctx) -> {
 					ctx.get().setPacketHandled(true);
-					ctx.get().enqueueWork(() -> ClientPacketHandler.handleSyncLookAt(msg));
 				}, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 		net.registerMessage(7, BargainDialogMsg.class,
 				BargainDialogMsg::write, BargainDialogMsg::read,
 				(msg, ctx) -> {
 					ctx.get().setPacketHandled(true);
-					ctx.get().enqueueWork(() -> ClientPacketHandler.handleBargainDialog(msg));
 				}, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 		net.registerMessage(8, BargainMsg.class,
 				BargainMsg::write, BargainMsg::read,
@@ -110,7 +106,6 @@ public final class ForgeParagliderNetwork extends ParagliderNetworkBase{
 					ctx.get().setPacketHandled(true);
 					ctx.get().enqueueWork(() -> {
 						switch(ctx.get().getDirection().getReceptionSide()){
-							case CLIENT -> ClientPacketHandler.handleBargainEnd(msg);
 							case SERVER -> {
 								ServerPlayer player = ctx.get().getSender();
 								if(player!=null) ServerPacketHandler.handleBargainEnd(player, msg);

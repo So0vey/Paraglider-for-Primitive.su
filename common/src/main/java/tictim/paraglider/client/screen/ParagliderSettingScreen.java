@@ -108,7 +108,7 @@ public class ParagliderSettingScreen extends Screen{
 		super.render(graphics, mouseX, mouseY, partialTicks);
 		if(this.saveLoadAction!=null){
 			this.saveLoadAction.update();
-			int alpha = !saveLoadAction.isComplete() ? 0xFF : BargainScreen.getDialogAlpha(ms()-saveLoadAction.saveCompleteTimestamp);
+			int alpha = !saveLoadAction.isComplete() ? 0xFF : 0xFF;
 			if(alpha==0) this.saveLoadAction = null;
 			else{
 				graphics.drawString(font, saveLoadAction.text(), 5, height-font.lineHeight-5, alpha<<24|0xFFFFFF, true);

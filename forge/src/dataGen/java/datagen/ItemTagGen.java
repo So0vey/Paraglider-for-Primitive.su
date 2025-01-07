@@ -22,8 +22,6 @@ public class ItemTagGen extends ItemTagsProvider{
 	}
 
 	@Override protected void addTags(@NotNull HolderLookup.Provider provider){
-		copy(ParagliderTags.Blocks.STATUES, ParagliderTags.STATUES);
-		copy(ParagliderTags.Blocks.STATUES_GODDESS, ParagliderTags.STATUES_GODDESS);
 
 		Contents contents = Contents.get();
 		tag(ParagliderTags.PARAGLIDERS).add(contents.paraglider(), contents.dekuLeaf());
