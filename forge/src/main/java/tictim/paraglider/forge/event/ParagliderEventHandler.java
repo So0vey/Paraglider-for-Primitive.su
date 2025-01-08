@@ -16,7 +16,6 @@ import tictim.paraglider.ParagliderMod;
 import tictim.paraglider.ParagliderUtils;
 import tictim.paraglider.api.ParagliderAPI;
 import tictim.paraglider.api.movement.Movement;
-import tictim.paraglider.bargain.BargainHandler;
 import tictim.paraglider.forge.capability.PlayerMovementProvider;
 import tictim.paraglider.impl.movement.PlayerMovement;
 import tictim.paraglider.impl.movement.ServerPlayerMovement;
@@ -94,11 +93,6 @@ public final class ParagliderEventHandler{
 		if(Movement.get(event.getEntity()) instanceof ServerPlayerMovement serverPlayerMovement){
 			serverPlayerMovement.markForSync();
 		}
-	}
-
-	@SubscribeEvent
-	public static void onServerTick(TickEvent.ServerTickEvent event){
-		if(event.phase==TickEvent.Phase.END) BargainHandler.update();
 	}
 
 	@SubscribeEvent

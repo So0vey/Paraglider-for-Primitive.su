@@ -23,7 +23,6 @@ import tictim.paraglider.api.bargain.Bargain;
 import tictim.paraglider.contents.Contents;
 import tictim.paraglider.contents.item.ParagliderItem;
 import tictim.paraglider.contents.recipe.CosmeticRecipe;
-import tictim.paraglider.contents.recipe.SimpleBargainSerializer;
 import tictim.paraglider.forge.contents.item.ForgeParagliderItem;
 import tictim.paraglider.forge.contents.loot.LootConditions;
 import tictim.paraglider.forge.contents.loot.ParagliderLoot;
@@ -47,7 +46,6 @@ public final class ForgeContents implements Contents{
 	private final RegistryObject<ParagliderItem> dekuLeaf = items.register("deku_leaf", () -> new ForgeParagliderItem(DEKU_LEAF_DEFAULT_COLOR));
 
 	private final RegistryObject<CosmeticRecipe.Serializer> cosmeticRecipe = recipeSerializers.register("cosmetic", CosmeticRecipe.Serializer::new);
-	private final RegistryObject<SimpleBargainSerializer.Simple> bargainRecipe = recipeSerializers.register("statue_bargain", SimpleBargainSerializer.Simple::new);
 
 	private final RegistryObject<RecipeType<Bargain>> bargainRecipeType = recipeTypes.register("bargain",
 			() -> RecipeType.simple(ParagliderAPI.id("bargain")));
@@ -91,11 +89,5 @@ public final class ForgeContents implements Contents{
 	}
 	@Override @NotNull public CosmeticRecipe.Serializer cosmeticRecipeSerializer(){
 		return cosmeticRecipe.get();
-	}
-	@Override @NotNull public RecipeSerializer<? extends Bargain> bargainRecipeSerializer(){
-		return bargainRecipe.get();
-	}
-	@Override @NotNull public RecipeType<Bargain> bargainRecipeType(){
-		return bargainRecipeType.get();
 	}
 }

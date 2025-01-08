@@ -38,7 +38,6 @@ import tictim.paraglider.api.movement.Movement;
 import tictim.paraglider.api.movement.PlayerState;
 import tictim.paraglider.api.stamina.Stamina;
 import tictim.paraglider.api.vessel.VesselContainer;
-import tictim.paraglider.bargain.preview.QuantifiedIngredient;
 import tictim.paraglider.client.ParagliderClientSettings;
 import tictim.paraglider.config.DebugCfg;
 import tictim.paraglider.config.FeatureCfg;
@@ -148,31 +147,6 @@ public final class ParagliderUtils{
 		}
 	}
 
-	public static void checkBargainRecipes(@NotNull MinecraftServer server){
-		List<Bargain> recipes = server.getRecipeManager().getAllRecipesFor(Contents.get().bargainRecipeType());
-		BargainTypeRegistry typeRegistry = BargainTypeRegistry.get();
-		Map<ResourceLocation, List<ResourceLocation>> missingBargainTypes = new Object2ObjectAVLTreeMap<>();
-		int count = 0;
-		for(Bargain b : recipes){
-			ResourceLocation bargainType = b.getBargainType();
-			if(typeRegistry.getFromID(server, Objects.requireNonNull(bargainType))==null){
-				missingBargainTypes.computeIfAbsent(bargainType, s -> new ArrayList<>())
-						.add(Objects.requireNonNull(b.getId()));
-				count++;
-			}
-		}
-		if(count>0){
-			ParagliderMod.LOGGER.error("Found {} issues in bargain recipes:\n  {}", count,
-					missingBargainTypes.entrySet().stream()
-							.map(e -> "Cannot resolve bargain type "+e.getKey()+(e.getValue().size()==1 ?
-									" for bargain recipe "+e.getValue().get(0) :
-									" for bargain recipes "+e.getValue().stream()
-											.map(Object::toString)
-											.collect(Collectors.joining(", "))))
-							.collect(Collectors.joining("\n  ")));
-		}
-	}
-
 	/**
 	 * Tries to calculate item consumption for ingredient
 	 *
@@ -181,21 +155,6 @@ public final class ParagliderUtils{
 	 * @param consumptions Inventory index to consumption count, will be modified by this method
 	 * @return Whether it is possible to consume given amount of ingredient from the inventory
 	 */
-	public static boolean calculateConsumption(@NotNull QuantifiedIngredient ingredient,
-	                                           @NotNull Container inventory,
-	                                           @NotNull Int2IntOpenHashMap consumptions){
-		int amountLeft = ingredient.quantity();
-		for(int i = 0; amountLeft>0&&i<inventory.getContainerSize(); i++){
-			ItemStack stack = inventory.getItem(i);
-			int consumption = consumptions.get(i);
-			// already consumed entirety of the stack, or not a valid input
-			if(consumption>=stack.getCount()||!ingredient.test(stack)) continue;
-			int amountToConsume = Math.min(amountLeft, stack.getCount()-consumption);
-			amountLeft -= amountToConsume;
-			consumptions.put(i, consumption+amountToConsume);
-		}
-		return amountLeft<=0;
-	}
 
 	private static final DecimalFormat PERCENTAGE = new DecimalFormat("#.#%");
 	private static final DecimalFormat PERCENTAGE_SIGNED = new DecimalFormat("+#.#%;-#.#%");

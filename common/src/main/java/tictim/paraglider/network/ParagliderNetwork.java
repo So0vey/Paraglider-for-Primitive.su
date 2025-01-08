@@ -10,8 +10,6 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tictim.paraglider.ParagliderMod;
-import tictim.paraglider.bargain.BargainCatalog;
-import tictim.paraglider.bargain.BargainContext;
 import tictim.paraglider.impl.movement.PlayerStateMap;
 import tictim.paraglider.wind.WindChunk;
 
@@ -40,21 +38,6 @@ public interface ParagliderNetwork{
 	void syncVessels(@NotNull ServerPlayer player,
 	                 int stamina,
 	                 int staminaVessels);
-
-	// bargain
-
-	void initBargain(@NotNull BargainContext ctx, @Nullable Component initialDialog);
-
-	void syncBargainCatalog(@NotNull BargainContext ctx, @NotNull Map<ResourceLocation, BargainCatalog> catalog);
-
-	void syncBargainLookAt(@NotNull BargainContext ctx, @Nullable Vec3 lookAt);
-
-	void displayBargainDialog(@NotNull BargainContext ctx, @NotNull Component dialog);
-
-	void bargain(int sessionId, @NotNull ResourceLocation bargain);
-
-	void bargainEndToClient(@NotNull BargainContext ctx);
-	void bargainEndToServer(int sessionId);
 
 	// wind
 

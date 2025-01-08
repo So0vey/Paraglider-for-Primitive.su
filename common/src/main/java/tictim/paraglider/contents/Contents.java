@@ -21,7 +21,4 @@ public interface Contents{
 	// recipes
 
 	@NotNull CosmeticRecipe.Serializer cosmeticRecipeSerializer();
-	@NotNull RecipeSerializer<? extends Bargain> bargainRecipeSerializer();
-
-	@NotNull RecipeType<Bargain> bargainRecipeType();
 }

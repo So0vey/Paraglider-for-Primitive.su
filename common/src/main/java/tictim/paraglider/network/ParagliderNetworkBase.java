@@ -10,15 +10,8 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tictim.paraglider.ParagliderMod;
-import tictim.paraglider.bargain.BargainCatalog;
-import tictim.paraglider.bargain.BargainContext;
 import tictim.paraglider.impl.movement.PlayerStateMap;
-import tictim.paraglider.network.message.BargainDialogMsg;
-import tictim.paraglider.network.message.BargainEndMsg;
-import tictim.paraglider.network.message.BargainInitMsg;
-import tictim.paraglider.network.message.BargainMsg;
 import tictim.paraglider.network.message.Msg;
-import tictim.paraglider.network.message.SyncCatalogMsg;
 import tictim.paraglider.network.message.SyncLookAtMsg;
 import tictim.paraglider.network.message.SyncMovementMsg;
 import tictim.paraglider.network.message.SyncPlayerStateMapMsg;
@@ -77,48 +70,6 @@ public abstract class ParagliderNetworkBase implements ParagliderNetwork{
 		SyncVesselMsg msg = new SyncVesselMsg(stamina, staminaVessels);
 		traceSendToPlayer(Kind.VESSEL, player, msg);
 		sendToPlayer(player, msg);
-	}
-
-	@Override public void initBargain(@NotNull BargainContext ctx,
-	                                  @Nullable Component dialog){
-		BargainInitMsg msg = new BargainInitMsg(ctx.sessionId(), ctx.makeCatalog(), ctx.lookAt(), dialog);
-		traceSendToPlayer(Kind.BARGAIN, ctx.player(), msg);
-		sendToPlayer(ctx.player(), msg);
-	}
-
-	@Override public void syncBargainCatalog(@NotNull BargainContext ctx, @NotNull Map<ResourceLocation, BargainCatalog> catalog){
-		SyncCatalogMsg msg = new SyncCatalogMsg(ctx.sessionId(), catalog);
-		traceSendToPlayer(Kind.BARGAIN, ctx.player(), msg);
-		sendToPlayer(ctx.player(), msg);
-	}
-
-	@Override public void syncBargainLookAt(@NotNull BargainContext ctx, @Nullable Vec3 lookAt){
-		SyncLookAtMsg msg = new SyncLookAtMsg(ctx.sessionId(), lookAt);
-		traceSendToPlayer(Kind.BARGAIN, ctx.player(), msg);
-		sendToPlayer(ctx.player(), msg);
-	}
-
-	@Override public void displayBargainDialog(@NotNull BargainContext ctx, @NotNull Component dialog){
-		BargainDialogMsg msg = new BargainDialogMsg(ctx.sessionId(), dialog);
-		traceSendToPlayer(Kind.BARGAIN, ctx.player(), msg);
-		sendToPlayer(ctx.player(), msg);
-	}
-
-	@Override public void bargain(int sessionId, @NotNull ResourceLocation bargain){
-		BargainMsg msg = new BargainMsg(sessionId, bargain);
-		traceSendToServer(Kind.BARGAIN, msg);
-		sendToServer(msg);
-	}
-
-	@Override public void bargainEndToClient(@NotNull BargainContext ctx){
-		BargainEndMsg msg = new BargainEndMsg(ctx.sessionId());
-		traceSendToPlayer(Kind.BARGAIN, ctx.player(), msg);
-		sendToPlayer(ctx.player(), msg);
-	}
-	@Override public void bargainEndToServer(int sessionId){
-		BargainEndMsg msg = new BargainEndMsg(sessionId);
-		traceSendToServer(Kind.BARGAIN, msg);
-		sendToServer(msg);
 	}
 
 	@Override public void syncWind(@NotNull MinecraftServer server, @NotNull LevelChunk chunk, @NotNull WindChunk windChunk){

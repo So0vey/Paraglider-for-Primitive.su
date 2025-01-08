@@ -14,12 +14,7 @@ import tictim.paraglider.network.ClientPacketHandler;
 import tictim.paraglider.network.ParagliderNetwork;
 import tictim.paraglider.network.ParagliderNetworkBase;
 import tictim.paraglider.network.ServerPacketHandler;
-import tictim.paraglider.network.message.BargainDialogMsg;
-import tictim.paraglider.network.message.BargainEndMsg;
-import tictim.paraglider.network.message.BargainInitMsg;
-import tictim.paraglider.network.message.BargainMsg;
 import tictim.paraglider.network.message.Msg;
-import tictim.paraglider.network.message.SyncCatalogMsg;
 import tictim.paraglider.network.message.SyncLookAtMsg;
 import tictim.paraglider.network.message.SyncMovementMsg;
 import tictim.paraglider.network.message.SyncPlayerStateMapMsg;
@@ -69,50 +64,11 @@ public final class ForgeParagliderNetwork extends ParagliderNetworkBase{
 					ctx.get().setPacketHandled(true);
 					ctx.get().enqueueWork(() -> ClientPacketHandler.handleSyncVessel(msg));
 				}, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-
-		net.registerMessage(4, BargainInitMsg.class,
-				BargainInitMsg::write, BargainInitMsg::read,
-				(msg, ctx) -> {
-					ctx.get().setPacketHandled(true);
-				}, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-		net.registerMessage(5, SyncCatalogMsg.class,
-				SyncCatalogMsg::write, SyncCatalogMsg::read,
-				(msg, ctx) -> {
-					ctx.get().setPacketHandled(true);
-				}, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 		net.registerMessage(6, SyncLookAtMsg.class,
 				SyncLookAtMsg::write, SyncLookAtMsg::read,
 				(msg, ctx) -> {
 					ctx.get().setPacketHandled(true);
 				}, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-		net.registerMessage(7, BargainDialogMsg.class,
-				BargainDialogMsg::write, BargainDialogMsg::read,
-				(msg, ctx) -> {
-					ctx.get().setPacketHandled(true);
-				}, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-		net.registerMessage(8, BargainMsg.class,
-				BargainMsg::write, BargainMsg::read,
-				(msg, ctx) -> {
-					ctx.get().setPacketHandled(true);
-					ctx.get().enqueueWork(() -> {
-						ServerPlayer player = ctx.get().getSender();
-						if(player==null) return; // wrong side
-						ServerPacketHandler.handleBargain(player, msg);
-					});
-				}, Optional.of(NetworkDirection.PLAY_TO_SERVER));
-		net.registerMessage(9, BargainEndMsg.class,
-				BargainEndMsg::write, BargainEndMsg::read,
-				(msg, ctx) -> {
-					ctx.get().setPacketHandled(true);
-					ctx.get().enqueueWork(() -> {
-						switch(ctx.get().getDirection().getReceptionSide()){
-							case SERVER -> {
-								ServerPlayer player = ctx.get().getSender();
-								if(player!=null) ServerPacketHandler.handleBargainEnd(player, msg);
-							}
-						}
-					});
-				});
 		net.registerMessage(10, SyncWindMsg.class,
 				SyncWindMsg::write, SyncWindMsg::read,
 				(msg, ctx) -> {

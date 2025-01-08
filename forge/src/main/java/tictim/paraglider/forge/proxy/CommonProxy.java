@@ -69,7 +69,6 @@ public class CommonProxy{
 		// OnDatapackSyncEvent without player is called on datapack reload
 		MinecraftForge.EVENT_BUS.addListener((OnDatapackSyncEvent e) -> {
 			MinecraftServer server = e.getPlayerList().getServer();
-			ParagliderUtils.checkBargainRecipes(server);
 		});
 		MinecraftForge.EVENT_BUS.addListener((ServerStoppingEvent e) -> this.stateMapConfig.removeCallbacks());
 
@@ -87,7 +86,6 @@ public class CommonProxy{
 			ParagliderUtils.printPlayerStates(stateMap, getConnectionMap());
 			ParagliderNetwork.get().syncStateMapToAll(server, stateMap);
 		});
-		ParagliderUtils.checkBargainRecipes(server);
 	}
 
 	@NotNull public ParagliderClientSettings getClientSettings(){

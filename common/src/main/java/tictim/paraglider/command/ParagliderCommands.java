@@ -13,8 +13,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tictim.paraglider.ParagliderMod;
 import tictim.paraglider.api.vessel.VesselContainer;
-import tictim.paraglider.bargain.BargainContext;
-import tictim.paraglider.bargain.BargainHandler;
 import tictim.paraglider.config.PlayerStateMapConfig;
 import tictim.paraglider.contents.BargainTypeRegistry;
 import tictim.paraglider.impl.movement.PlayerStateMap;
@@ -41,7 +39,6 @@ public final class ParagliderCommands{
 				.then(setVessel(SetType.set))
 				.then(setVessel(SetType.give))
 				.then(setVessel(SetType.take))
-				.then(bargain())
 				.then(reloadPlayerStates());
 	}
 
@@ -88,80 +85,10 @@ public final class ParagliderCommands{
 												type)))));
 	}
 
-	private static LiteralArgumentBuilder<CommandSourceStack> bargain(){
-		return literal("bargain")
-				.requires(s -> s.hasPermission(2))
-				.then(literal("start")
-						.then(argument("player", player())
-								.then(argument("bargainType", id())
-										.executes(ctx -> startBargain(ctx.getSource(),
-												getPlayer(ctx, "player"),
-												getId(ctx, "bargainType"),
-												null, null, null))
-										.then(argument("pos", blockPos())
-												.executes(ctx -> startBargain(ctx.getSource(),
-														getPlayer(ctx, "player"),
-														getId(ctx, "bargainType"),
-														getBlockPos(ctx, "pos"),
-														null, null))
-												.then(argument("advancement", id())
-														.executes(ctx -> startBargain(ctx.getSource(),
-																getPlayer(ctx, "player"),
-																getId(ctx, "bargainType"),
-																getBlockPos(ctx, "pos"),
-																getId(ctx, "advancement"),
-																null))
-														.then(argument("lookAt", vec3())
-																.executes(ctx -> startBargain(ctx.getSource(),
-																		getPlayer(ctx, "player"),
-																		getId(ctx, "bargainType"),
-																		getBlockPos(ctx, "pos"),
-																		getId(ctx, "advancement"),
-																		getVec3(ctx, "lookAt")))))))))
-				.then(literal("end")
-						.then(argument("player", player())
-								.executes(ctx -> endBargain(ctx.getSource(), getPlayer(ctx, "player")))));
-	}
-
 	private static LiteralArgumentBuilder<CommandSourceStack> reloadPlayerStates(){
 		return literal("reloadPlayerStates")
 				.requires(s -> s.hasPermission(3))
 				.executes(context -> reloadPlayerStates(context.getSource()));
-	}
-
-	private static int startBargain(@NotNull CommandSourceStack source,
-	                                @NotNull ServerPlayer player,
-	                                @NotNull ResourceLocation bargainType,
-	                                @Nullable BlockPos pos,
-	                                @Nullable ResourceLocation advancement,
-	                                @Nullable Vec3 lookAt){
-		if(BargainTypeRegistry.get().getFromID(player.serverLevel(), bargainType)==null){
-			source.sendFailure(Component.translatable("commands.paraglider.bargain.start.invalid_bargain_type", bargainType));
-			return -1;
-		}
-		if(BargainHandler.initiate(player, bargainType, pos, advancement, lookAt)){
-			source.sendSuccess(() -> Component.translatable("commands.paraglider.bargain.start.success", player.getDisplayName(), bargainType), true);
-			return 1;
-		}else{
-			source.sendFailure(Component.translatable("commands.paraglider.bargain.start.no_bargain", player.getDisplayName(), bargainType, pos));
-			return 0;
-		}
-	}
-
-	private static int endBargain(@NotNull CommandSourceStack source, @NotNull ServerPlayer player){
-		BargainContext bargain = BargainHandler.getBargain(player);
-		if(bargain!=null){
-			if(bargain.isFinished()){
-				source.sendFailure(Component.translatable("command.paraglider.bargain.end.already_finished", player.getDisplayName()));
-				return 0;
-			}
-			source.sendSuccess(() -> Component.translatable("command.paraglider.bargain.end.success", player.getDisplayName()), true);
-			bargain.markFinished();
-			return 1;
-		}else{
-			source.sendFailure(Component.translatable("command.paraglider.bargain.end.no_bargain", player.getDisplayName()));
-			return -1;
-		}
 	}
 
 	private static int reloadPlayerStates(@NotNull CommandSourceStack source){

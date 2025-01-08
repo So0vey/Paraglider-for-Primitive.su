@@ -25,6 +25,7 @@ public abstract class ParagliderItem extends Item implements DyeableLeatherItem,
 		this.defaultColor = defaultColor;
 	}
 
+
 	@Override public int getColor(@NotNull ItemStack stack){
 		CompoundTag nbt = stack.getTagElement("display");
 		return nbt!=null&&nbt.contains("color", 99) ? nbt.getInt("color") : defaultColor;

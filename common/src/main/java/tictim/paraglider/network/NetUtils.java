@@ -6,7 +6,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tictim.paraglider.bargain.BargainCatalog;
 
 import java.util.Map;
 
@@ -24,19 +23,5 @@ public final class NetUtils{
 			buffer.writeDouble(lookAt.y);
 			buffer.writeDouble(lookAt.z);
 		}
-	}
-
-	@NotNull public static Map<ResourceLocation, BargainCatalog> readCatalogs(@NotNull FriendlyByteBuf buffer){
-		Map<ResourceLocation, BargainCatalog> map = new Object2ObjectOpenHashMap<>();
-		for(int i = 0, count = buffer.readVarInt(); i<count; i++){
-			BargainCatalog c = BargainCatalog.read(buffer);
-			map.put(c.bargain(), c);
-		}
-		return map;
-	}
-
-	public static void writeCatalogs(@NotNull FriendlyByteBuf buffer, @NotNull Map<ResourceLocation, BargainCatalog> previews){
-		buffer.writeVarInt(previews.size());
-		for(var e : previews.values()) e.write(buffer);
 	}
 }

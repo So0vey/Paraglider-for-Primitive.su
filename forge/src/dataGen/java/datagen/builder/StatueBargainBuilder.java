@@ -165,9 +165,6 @@ public class StatueBargainBuilder{
 		@Override @NotNull public ResourceLocation getId(){
 			return id;
 		}
-		@Override @NotNull public RecipeSerializer<?> getType(){
-			return Contents.get().bargainRecipeSerializer();
-		}
 		@Override @Nullable public JsonObject serializeAdvancement(){
 			return null;
 		}
