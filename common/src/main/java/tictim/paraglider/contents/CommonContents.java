@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 public interface CommonContents{
 	int PARAGLIDER_DEFAULT_COLOR = 0xA65955;
 	int DEKU_LEAF_DEFAULT_COLOR = 0x3FB53F;
+	int PARAGLIDER_COLORED_DEFAULT_COLOR = 0x3d85c6;
 
 	@NotNull static BlockBehaviour.Properties statueBlock(){
 		return Block.Properties.of()

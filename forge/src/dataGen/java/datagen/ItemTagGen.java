@@ -25,5 +25,6 @@ public class ItemTagGen extends ItemTagsProvider{
 
 		Contents contents = Contents.get();
 		tag(ParagliderTags.PARAGLIDERS).add(contents.paraglider(), contents.dekuLeaf());
+		tag(ParagliderTags.PARAGLIDERS).add(contents.paraglider(), contents.coloredGliderOne());
 	}
 }

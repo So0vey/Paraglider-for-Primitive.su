@@ -35,6 +35,7 @@ public class ClientProxy extends CommonProxy{
 		eventBus.addListener((FMLClientSetupEvent e) -> e.enqueueWork(() -> {
 			ItemProperties.register(Contents.get().paraglider(), ParagliderItemProperty.KEY_PARAGLIDING, ParagliderItemProperty.get());
 			ItemProperties.register(Contents.get().dekuLeaf(), ParagliderItemProperty.KEY_PARAGLIDING, ParagliderItemProperty.get());
+			ItemProperties.register(Contents.get().coloredGliderOne(), ParagliderItemProperty.KEY_PARAGLIDING, ParagliderItemProperty.get());
 		}));
 		eventBus.addListener((RegisterKeyMappingsEvent e) -> e.register(paragliderSettingsKey = new KeyMapping(
 				"key.paraglider.paragliderSettings",
@@ -45,6 +46,7 @@ public class ClientProxy extends CommonProxy{
 		eventBus.addListener((RegisterColorHandlersEvent.Item e) -> {
 			e.register(new ParagliderItemColor(Contents.get().paraglider()), Contents.get().paraglider());
 			e.register(new ParagliderItemColor(Contents.get().dekuLeaf()), Contents.get().dekuLeaf());
+			e.register(new ParagliderItemColor(Contents.get().coloredGliderOne()), Contents.get().coloredGliderOne());
 		});
 		eventBus.addListener((RegisterGuiOverlaysEvent e) -> e.registerAboveAll("stamina_wheel", new StaminaWheelOverlay()));
 

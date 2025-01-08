@@ -42,6 +42,7 @@ public class CommonProxy{
 		eventBus.addListener((FMLCommonSetupEvent e) -> e.enqueueWork(() -> {
 			CauldronInteraction.WATER.put(Contents.get().paraglider(), CauldronInteraction.DYED_ITEM);
 			CauldronInteraction.WATER.put(Contents.get().dekuLeaf(), CauldronInteraction.DYED_ITEM);
+			CauldronInteraction.WATER.put(Contents.get().coloredGliderOne(), CauldronInteraction.DYED_ITEM);
 		}));
 		eventBus.addListener((RegisterCapabilitiesEvent e) -> e.register(PlayerMovement.class));
 

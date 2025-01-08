@@ -44,6 +44,7 @@ public final class ForgeContents implements Contents{
 
 	private final RegistryObject<ParagliderItem> paraglider = items.register("paraglider", () -> new ForgeParagliderItem(PARAGLIDER_DEFAULT_COLOR));
 	private final RegistryObject<ParagliderItem> dekuLeaf = items.register("deku_leaf", () -> new ForgeParagliderItem(DEKU_LEAF_DEFAULT_COLOR));
+	private final RegistryObject<ParagliderItem> coloredGliderOne = items.register("colored_glider_one", () -> new ForgeParagliderItem(PARAGLIDER_COLORED_DEFAULT_COLOR));
 
 	private final RegistryObject<CosmeticRecipe.Serializer> cosmeticRecipe = recipeSerializers.register("cosmetic", CosmeticRecipe.Serializer::new);
 
@@ -63,6 +64,7 @@ public final class ForgeContents implements Contents{
 			.displayItems((features, out) -> {
 				out.accept(paraglider.get());
 				out.accept(dekuLeaf.get());
+				out.accept(coloredGliderOne.get());
 			}).build());
 
 	{
@@ -86,6 +88,9 @@ public final class ForgeContents implements Contents{
 	}
 	@Override @NotNull public ParagliderItem dekuLeaf(){
 		return dekuLeaf.get();
+	}
+	@Override public @NotNull ParagliderItem coloredGliderOne() {
+		return coloredGliderOne.get();
 	}
 	@Override @NotNull public CosmeticRecipe.Serializer cosmeticRecipeSerializer(){
 		return cosmeticRecipe.get();
