@@ -84,7 +84,6 @@ public abstract class PlayerMovement implements Movement, Copy{
 		setRecoveryDelay(movement.recoveryDelay());
 		if(!(from instanceof PlayerMovement playerMovement)) return;
 		if(stamina() instanceof Copy copy) copy.copyFrom(playerMovement.stamina());
-		if(vessels() instanceof Copy copy) copy.copyFrom(playerMovement.vessels());
 	}
 
 	protected void applyMovement(){

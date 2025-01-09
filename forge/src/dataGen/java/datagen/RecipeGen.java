@@ -12,7 +12,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 import tictim.paraglider.api.ParagliderAPI;
-import tictim.paraglider.api.bargain.ParagliderBargainTypes;
 import tictim.paraglider.contents.Contents;
 import tictim.paraglider.contents.ParagliderTags;
 import tictim.paraglider.forge.contents.ConfigConditionSerializer;
@@ -53,8 +52,8 @@ public class RecipeGen extends RecipeProvider{
 				.addCriterion("has_paragliders", has(ParagliderTags.PARAGLIDERS))
 				.build(consumer, ParagliderAPI.id("cosmetic/paraglider"));
 
-		new CosmeticRecipeBuilder(contents.paraglider(), Ingredient.of(ParagliderTags.PARAGLIDERS), Ingredient.of(Tags.Items.RODS_WOODEN))
-				.addCriterion("has_paragliders", has(ParagliderTags.PARAGLIDERS))
-				.build(consumer, ParagliderAPI.id("cosmetic/coloredGliderOne"));
+//		new CosmeticRecipeBuilder(contents.coloredGliderOne(), Ingredient.of(ParagliderTags.PARAGLIDERS), Ingredient.of(Tags.Items.RODS_WOODEN))
+//				.addCriterion("has_paragliders", has(ParagliderTags.PARAGLIDERS))
+//				.build(consumer, ParagliderAPI.id("cosmetic/coloredGliderOne"));
 	}
 }

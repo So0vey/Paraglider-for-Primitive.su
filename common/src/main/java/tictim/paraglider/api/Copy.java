@@ -3,10 +3,9 @@ package tictim.paraglider.api;
 import org.jetbrains.annotations.NotNull;
 import tictim.paraglider.api.movement.Movement;
 import tictim.paraglider.api.stamina.Stamina;
-import tictim.paraglider.api.vessel.VesselContainer;
 
 /**
- * Interface providing method for copying properties between instances. If {@link Movement}, {@link VesselContainer}
+ * Interface providing method for copying properties between instances. If {@link Movement}
  * or {@link Stamina} implements this, the game will use the method to transfer any property between different instances
  * of each type, in case where re-instantiation is necessary (e.g. player entity respawn, dimension change)
  */

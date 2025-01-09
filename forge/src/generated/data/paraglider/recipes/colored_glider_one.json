@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "tag": "forge:rods/wooden"
+    },
+    "2": {
+      "tag": "forge:leather"
+    }
+  },
+  "pattern": [
+    "222",
+    "212",
+    "1 1"
+  ],
+  "result": {
+    "item": "paraglider:colored_glider_one"
+  },
+  "show_notification": true
+}

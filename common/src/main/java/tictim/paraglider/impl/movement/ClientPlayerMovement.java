@@ -5,8 +5,6 @@ import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
 import tictim.paraglider.api.ParagliderAPI;
 import tictim.paraglider.api.stamina.Stamina;
-import tictim.paraglider.api.vessel.VesselContainer;
-import tictim.paraglider.impl.vessel.SimpleVesselContainer;
 
 import static tictim.paraglider.api.movement.ParagliderPlayerStates.Flags.FLAG_PARAGLIDING;
 
@@ -22,9 +20,6 @@ public class ClientPlayerMovement extends RemotePlayerMovement{
 	}
 	@Override @NotNull protected Stamina createStamina(){
 		return ParagliderAPI.staminaFactory().createLocalClientInstance(player());
-	}
-	@Override @NotNull protected VesselContainer createVesselContainer(){
-		return new SimpleVesselContainer(player());
 	}
 
 	@Override public void update(){

@@ -12,7 +12,6 @@ import tictim.paraglider.config.Cfg;
 import tictim.paraglider.config.DebugCfg;
 import tictim.paraglider.config.FeatureCfg;
 import tictim.paraglider.config.PlayerStateMapConfig;
-import tictim.paraglider.contents.BargainTypeRegistry;
 import tictim.paraglider.contents.Contents;
 import tictim.paraglider.impl.movement.PlayerStateConnectionMap;
 import tictim.paraglider.impl.movement.PlayerStateMap;
@@ -44,7 +43,6 @@ public abstract class ParagliderMod{
 
 	@NotNull public abstract Contents getContents();
 	@NotNull public abstract ParagliderNetwork getNetwork();
-	@NotNull public abstract BargainTypeRegistry getBargainTypeRegistry();
 	@NotNull public abstract ParagliderPluginLoader getPluginLoader();
 
 	@NotNull public abstract PlayerStateMap getPlayerStateMap();

@@ -5,8 +5,6 @@ package tictim.paraglider;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
-import it.unimi.dsi.fastutil.objects.Object2ObjectAVLTreeMap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
@@ -15,12 +13,10 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.PlayerAdvancements;
 import net.minecraft.server.ServerAdvancementManager;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -33,16 +29,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tictim.paraglider.api.bargain.Bargain;
 import tictim.paraglider.api.movement.Movement;
 import tictim.paraglider.api.movement.PlayerState;
 import tictim.paraglider.api.stamina.Stamina;
-import tictim.paraglider.api.vessel.VesselContainer;
 import tictim.paraglider.client.ParagliderClientSettings;
 import tictim.paraglider.config.DebugCfg;
 import tictim.paraglider.config.FeatureCfg;
-import tictim.paraglider.contents.BargainTypeRegistry;
-import tictim.paraglider.contents.Contents;
 import tictim.paraglider.impl.movement.ClientPlayerMovement;
 import tictim.paraglider.impl.movement.PlayerMovement;
 import tictim.paraglider.impl.movement.PlayerStateConnectionMap;
@@ -51,10 +43,7 @@ import tictim.paraglider.impl.movement.RemotePlayerMovement;
 import tictim.paraglider.impl.movement.ServerPlayerMovement;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -162,7 +151,6 @@ public final class ParagliderUtils{
 	public static void addDebugText(@NotNull Player p, @NotNull List<String> list){
 		Movement movement = Movement.get(p);
 		Stamina stamina = Stamina.get(p);
-		VesselContainer vessels = VesselContainer.get(p);
 		ParagliderClientSettings clientSettings = ParagliderClientSettings.get();
 
 		PlayerState state = movement.state();
@@ -194,7 +182,6 @@ public final class ParagliderUtils{
 		list.add(stb.toString());
 
 		list.add("Recovery Delay: "+state.recoveryDelay());
-		list.add(vessels.staminaVessel()+" Stamina Vessels, ");
 		list.add(movement.recoveryDelay()+" Recovery Delay");
 		list.add("Stamina Wheel X: "+PERCENTAGE.format(clientSettings.staminaWheelX())+
 				", Stamina Wheel Y: "+PERCENTAGE.format(clientSettings.staminaWheelY()));

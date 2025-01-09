@@ -14,10 +14,8 @@ import tictim.paraglider.config.Cfg;
 import tictim.paraglider.config.DebugCfg;
 import tictim.paraglider.config.FeatureCfg;
 import tictim.paraglider.config.PlayerStateMapConfig;
-import tictim.paraglider.contents.BargainTypeRegistry;
 import tictim.paraglider.forge.config.ForgeCommonConfig;
 import tictim.paraglider.forge.config.ForgeConfig;
-import tictim.paraglider.forge.contents.ForgeBargainTypeRegistry;
 import tictim.paraglider.forge.contents.ForgeContents;
 import tictim.paraglider.forge.proxy.ClientProxy;
 import tictim.paraglider.forge.proxy.CommonProxy;
@@ -63,9 +61,6 @@ public class ForgeParagliderMod extends ParagliderMod{
 		return ForgeParagliderNetwork.get();
 	}
 
-	@Override @NotNull public BargainTypeRegistry getBargainTypeRegistry(){
-		return ForgeBargainTypeRegistry.get();
-	}
 	@Override @NotNull public ParagliderPluginLoader getPluginLoader(){
 		return ForgeParagliderPluginLoader.get();
 	}

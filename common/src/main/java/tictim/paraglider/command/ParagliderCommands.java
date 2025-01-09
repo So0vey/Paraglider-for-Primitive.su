@@ -2,19 +2,12 @@ package tictim.paraglider.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import tictim.paraglider.ParagliderMod;
-import tictim.paraglider.api.vessel.VesselContainer;
 import tictim.paraglider.config.PlayerStateMapConfig;
-import tictim.paraglider.contents.BargainTypeRegistry;
 import tictim.paraglider.impl.movement.PlayerStateMap;
 
 import static com.mojang.brigadier.arguments.IntegerArgumentType.getInteger;
@@ -23,11 +16,6 @@ import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
 import static net.minecraft.commands.arguments.EntityArgument.getPlayer;
 import static net.minecraft.commands.arguments.EntityArgument.player;
-import static net.minecraft.commands.arguments.ResourceLocationArgument.getId;
-import static net.minecraft.commands.arguments.ResourceLocationArgument.id;
-import static net.minecraft.commands.arguments.coordinates.BlockPosArgument.blockPos;
-import static net.minecraft.commands.arguments.coordinates.BlockPosArgument.getBlockPos;
-import static net.minecraft.commands.arguments.coordinates.Vec3Argument.getVec3;
 import static net.minecraft.commands.arguments.coordinates.Vec3Argument.vec3;
 
 public final class ParagliderCommands{
@@ -144,10 +132,9 @@ public final class ParagliderCommands{
 		}
 
 		private int tell(@NotNull CommandSourceStack source, @NotNull Player player){
-			VesselContainer vessels = VesselContainer.get(player);
 			int value = switch(this){
                 case HEART -> 0;
-                case STAMINA -> vessels.staminaVessel();
+                case STAMINA -> 0;
 				case ESSENCE -> 0;
 			};
 			source.sendSuccess(() -> Component.translatable(getResult, player.getDisplayName(), value), false);
@@ -158,72 +145,34 @@ public final class ParagliderCommands{
 		                @NotNull Player player,
 		                int amount,
 		                @NotNull SetType type){
-			VesselContainer vessels = VesselContainer.get(player);
 			switch(type){
 				case set -> {
-					switch(set(vessels, amount, false, true)){
-						case OK -> {
-							source.sendSuccess(() -> Component.translatable(setSuccess, player.getDisplayName(), amount), true);
-							return 1;
-						}
-						case NO_CHANGE -> {
-							source.sendSuccess(() -> Component.translatable(setNoChange, player.getDisplayName(), amount), true);
-							return 0;
-						}
-						case TOO_HIGH -> {
-							source.sendFailure(Component.translatable(setTooHigh, amount));
-							return -1;
-						}
-						case TOO_LOW -> {
-							source.sendFailure(Component.translatable(setTooLow, amount));
-							return -1;
-						}
-						case FAIL -> {
-							source.sendFailure(Component.translatable(setFail));
-							return -1;
-						}
-					}
+					return 0;
+//					-1 and 1 etc
 				}
 				case give -> {
-					if(give(vessels, amount, true, false)!=amount){
-						source.sendFailure(Component.translatable(giveFail, player.getDisplayName(), amount));
-						return 0;
-					}
-					source.sendSuccess(() -> Component.translatable(giveSuccess, player.getDisplayName(), amount), true);
-					return give(vessels, amount, false, true);
+					return 0;
 				}
 				case take -> {
-					if(take(vessels, amount, true, false)!=amount){
-						source.sendFailure(Component.translatable(takeFail, player.getDisplayName(), amount));
-						return 0;
-					}
-					source.sendSuccess(() -> Component.translatable(takeSuccess, player.getDisplayName(), amount), true);
-					return take(vessels, amount, false, true);
+					return 0;
 				}
 			}
 			throw new IllegalStateException("Unreachable");
 		}
 
-		@NotNull private VesselContainer.SetResult set(@NotNull VesselContainer vessels, int amount, boolean simulate, boolean playEffect){
-			return switch(this){
-                case HEART -> null;
-                case STAMINA -> vessels.setStaminaVessel(amount, simulate, playEffect);
-				case ESSENCE -> null;
-			};
-		}
 
-		private int give(@NotNull VesselContainer vessels, int amount, boolean simulate, boolean playEffect){
+		private int give(@NotNull int amount, boolean simulate, boolean playEffect){
 			return switch(this){
                 case HEART -> 0;
-                case STAMINA -> vessels.giveStaminaVessels(amount, simulate, playEffect);
+                case STAMINA -> 0;
 				case ESSENCE -> 0;
 			};
 		}
 
-		private int take(@NotNull VesselContainer vessels, int amount, boolean simulate, boolean playEffect){
+		private int take(@NotNull int amount, boolean simulate, boolean playEffect){
 			return switch(this){
                 case HEART -> 0;
-                case STAMINA -> vessels.takeStaminaVessels(amount, simulate, playEffect);
+                case STAMINA -> 0;
 				case ESSENCE -> 0;
 			};
 		}

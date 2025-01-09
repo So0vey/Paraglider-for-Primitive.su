@@ -19,7 +19,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import tictim.paraglider.api.ParagliderAPI;
-import tictim.paraglider.api.bargain.Bargain;
 import tictim.paraglider.contents.Contents;
 import tictim.paraglider.contents.item.ParagliderItem;
 import tictim.paraglider.contents.recipe.CosmeticRecipe;
@@ -47,9 +46,6 @@ public final class ForgeContents implements Contents{
 	private final RegistryObject<ParagliderItem> coloredGliderOne = items.register("colored_glider_one", () -> new ForgeParagliderItem(PARAGLIDER_COLORED_DEFAULT_COLOR));
 
 	private final RegistryObject<CosmeticRecipe.Serializer> cosmeticRecipe = recipeSerializers.register("cosmetic", CosmeticRecipe.Serializer::new);
-
-	private final RegistryObject<RecipeType<Bargain>> bargainRecipeType = recipeTypes.register("bargain",
-			() -> RecipeType.simple(ParagliderAPI.id("bargain")));
 
 	private final RegistryObject<Codec<ParagliderLoot>> paragliderLoot = loots.register("paraglider", () -> ParagliderLoot.CODEC);
 	private final RegistryObject<Codec<VesselLoot>> vesselLoot = loots.register("vessel", () -> VesselLoot.CODEC);

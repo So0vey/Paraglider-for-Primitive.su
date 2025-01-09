@@ -217,16 +217,8 @@ public class ServerPlayerMovement extends PlayerMovement implements Serde{
 				tag2.putBoolean("depleted", tag.getBoolean("depleted"));
 				serde.read(tag2);
 			}
-			if(vessels() instanceof Serde serde){
-				CompoundTag tag2 = new CompoundTag();
-				tag2.putInt("heartContainers", tag.getInt("heartContainers"));
-				tag2.putInt("staminaVessels", tag.getInt("staminaVessels"));
-				tag2.putInt("essences", tag.getInt("essence")); // add missing s
-				serde.read(tag2);
-			}
 		}else{
 			if(stamina() instanceof Serde serde) serde.read(tag.getCompound("stamina"));
-			if(vessels() instanceof Serde serde) serde.read(tag.getCompound("vessels"));
 		}
 		setRecoveryDelay(tag.getInt("recoveryDelay"));
 		this.panicParaglidingDelay = tag.getInt("panicParaglidingDelay");

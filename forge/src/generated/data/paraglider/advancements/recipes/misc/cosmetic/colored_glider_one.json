@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_goddess_statue": {
+    "has_paragliders": {
       "conditions": {
         "items": [
           {
-            "tag": "paraglider:statues/goddess"
+            "tag": "paraglider:paragliders"
           }
         ]
       },
@@ -13,20 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "paraglider:cosmetic/goddess_statue"
+        "recipe": "paraglider:cosmetic/colored_glider_one"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_goddess_statue",
+      "has_paragliders",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "paraglider:cosmetic/goddess_statue"
+      "paraglider:cosmetic/colored_glider_one"
     ]
   },
   "sends_telemetry_event": true

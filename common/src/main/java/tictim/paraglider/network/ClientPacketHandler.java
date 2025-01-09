@@ -7,7 +7,6 @@ import org.jetbrains.annotations.NotNull;
 import tictim.paraglider.ParagliderMod;
 import tictim.paraglider.api.movement.Movement;
 import tictim.paraglider.api.stamina.Stamina;
-import tictim.paraglider.api.vessel.VesselContainer;
 import tictim.paraglider.network.message.Msg;
 import tictim.paraglider.network.message.SyncLookAtMsg;
 import tictim.paraglider.network.message.SyncMovementMsg;
@@ -51,8 +50,6 @@ public final class ClientPacketHandler{
 		trace(Kind.VESSEL, msg);
 		Minecraft mc = Minecraft.getInstance();
 		if(mc.player==null) return;
-		VesselContainer vessels = VesselContainer.get(mc.player);
-//		vessels.setStaminaVessel(msg.staminaVessels(), false, false);
 		Stamina.get(mc.player).setStamina(msg.stamina());
 	}
 
